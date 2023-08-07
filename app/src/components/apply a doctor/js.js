@@ -12,6 +12,8 @@ const ApplyDoctorForm = () => {
 
     // тут я добавлю код для отправки на сервер потом как-то
 
+    //  localstorage.getitem(user)
+
     setFullName("");
     setAge("");
     setExperience("");
