@@ -1,0 +1,20 @@
+.doctors-appoitments{
+	border: 2px solid  red;
+	width: 80%;
+	margin: 0 auto;
+}
+.doctors-appoitments__title{
+	text-align: center;
+	border-bottom: 2px solid grey;
+	padding-bottom: 2%;
+}
+.doctors-appoitments__item{
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 10px;
+	resize: vertical;
+	width: 100%;
+}
+.doctors-appoitments__button{
+
+}
