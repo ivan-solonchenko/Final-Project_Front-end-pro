@@ -1,5 +1,5 @@
 import { Form, Input } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
@@ -8,15 +8,10 @@ function Register() {
     const server = 'https://jsonplaceholder.typicode.com/users';
 
     const [formData, setFormData] = useState({
+        name: '',
         email: '',
         password: '',
-        name: '',
     });
-
-    useEffect(() => {
-        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
-        if (loggedInUser) navigate("/home")
-    }, [])
 
     const onFinish = () => {
         fetch(server)
@@ -32,7 +27,7 @@ function Register() {
                     users.push(newUser);
 
                     return fetch(server, {
-                        method: 'PUT',
+                        method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },

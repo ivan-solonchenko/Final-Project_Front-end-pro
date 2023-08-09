@@ -27,6 +27,10 @@ h1, h2, h3, h4, h5, h6, a, span, p {
     text-transform: uppercase;
 }
 
+.no-star .ant-form-item-required:before {
+    display: none !important;
+}
+
 .login-button {
     height: 45px;
     width: 100%;

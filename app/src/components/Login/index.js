@@ -13,22 +13,25 @@ function Login() {
     });
 
     useEffect(() => {
-        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
-        if (loggedInUser) navigate("/home")
-    }, [])
+        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+        if (loggedInUser) navigate("/home");
+    }, [navigate]);
 
-    const onFinish = () => {
+    const onFinish = (values) => {
         fetch(server)
             .then(response => response.json())
             .then(users => {
-                const foundUser = users.find(user => user.email === formData.email && user.username === formData.password);
+                const foundUser = users.find(user => user.email === values.email && user.username === values.password);
+                const errorPassword = users.find(user => user.email === values.email && user.username !== values.password);
 
                 if (foundUser) {
                     message.success('Ви увійшли!');
-                    localStorage.setItem('loggedInUser', JSON.stringify(formData));
+                    localStorage.setItem('loggedInUser', JSON.stringify(values));
                     navigate('/home');
-                    clearFields()
-
+                    clearFields();
+                } else if (errorPassword) {
+                    message.error('Ви ввели невірний пароль!');
+                    setFormData({ ...formData, password: '' });
                 } else {
                     message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
                     navigate('/register');
@@ -48,26 +51,29 @@ function Login() {
     };
 
     const clearFields = () => {
-        formData.email = ''
-        formData.password = ''
+        setFormData({
+            email: '',
+            password: '',
+        });
     };
-
 
     return (
         <div className="login-content">
-            <Form layout="vertical" className="login-form">
+            <Form layout="vertical" className="login-form" onFinish={onFinish}>
                 <h2 className="login-form-title">Вхід
                     <hr />
                 </h2>
-                <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Будь ласка, введіть email' }]}>
+                <Form.Item label="Email" className={"no-star"} name="email" rules={[{ required: true, message: 'Будь ласка, введіть email' }]}>
                     <Input type="email"  name="email" value={formData.email} onChange={handleInputChange} />
                 </Form.Item>
-                <Form.Item label="Пароль" name="password" rules={[{ required: true, message: 'Будь ласка, введіть пароль' }]}>
+                <Form.Item label="Пароль" className={"no-star"} name="password" rules={[{ required: true, message: 'Будь ласка, введіть пароль' }]}>
                     <Input type="password" name="password" value={formData.password} onChange={handleInputChange} />
                 </Form.Item>
-                <button onClick={onFinish} className="login-button" type="submit">
-                    Увійти
-                </button>
+                <Form.Item>
+                    <button className="login-button" type="submit">
+                        Увійти
+                    </button>
+                </Form.Item>
                 <Link to="/register">
                     Не маєте облікового запису? <strong>Зареєструватися</strong>
                 </Link>
