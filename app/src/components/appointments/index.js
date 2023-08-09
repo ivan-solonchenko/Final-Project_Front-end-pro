@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 
 import './index.css';
 

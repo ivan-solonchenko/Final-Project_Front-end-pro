@@ -5,7 +5,7 @@ import { message } from 'antd';
 
 function Register() {
     const navigate = useNavigate()
-    const server = 'https://jsonplaceholder.typicode.com/users';
+    const server = 'http://localhost:8080/api/users';
 
     const [formData, setFormData] = useState({
         name: '',
@@ -24,14 +24,13 @@ function Register() {
                 } else {
                     const newUserId = users.length + 1;
                     const newUser = { id: newUserId, ...formData };
-                    users.push(newUser);
 
                     return fetch(server, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify(users),
+                        body: JSON.stringify(newUser),
                     });
                 }
             })

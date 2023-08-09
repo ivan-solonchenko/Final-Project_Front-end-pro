@@ -5,7 +5,7 @@ import { message } from 'antd';
 
 function Login() {
     const navigate = useNavigate();
-    const server = 'https://jsonplaceholder.typicode.com/users';
+    const server = 'http://localhost:8080/api/users';
 
     const [formData, setFormData] = useState({
         email: '',
@@ -21,8 +21,8 @@ function Login() {
         fetch(server)
             .then(response => response.json())
             .then(users => {
-                const foundUser = users.find(user => user.email === values.email && user.username === values.password);
-                const errorPassword = users.find(user => user.email === values.email && user.username !== values.password);
+                const foundUser = users.find(user => user.email === values.email && user.password === values.password);
+                const errorPassword = users.find(user => user.email === values.email && user.password !== values.password);
 
                 if (foundUser) {
                     message.success('Ви увійшли!');
