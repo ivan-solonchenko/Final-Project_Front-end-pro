@@ -1,19 +1,24 @@
 import { Form, Input } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
 function Login() {
     const navigate = useNavigate();
-    const localPath = 'https://jsonplaceholder.typicode.com/users';
+    const server = 'https://jsonplaceholder.typicode.com/users';
 
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
 
+    useEffect(() => {
+        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"))
+        if (loggedInUser) navigate("/home")
+    }, [])
+
     const onFinish = () => {
-        fetch(localPath)
+        fetch(server)
             .then(response => response.json())
             .then(users => {
                 const foundUser = users.find(user => user.email === formData.email && user.username === formData.password);
@@ -23,6 +28,7 @@ function Login() {
                     localStorage.setItem('loggedInUser', JSON.stringify(formData));
                     navigate('/home');
                     clearFields()
+
                 } else {
                     message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
                     navigate('/register');
