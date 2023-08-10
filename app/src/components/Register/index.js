@@ -2,6 +2,7 @@ import { Form, Input } from 'antd';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
+import bcrypt from 'bcryptjs';
 
 function Register() {
     const navigate = useNavigate()
@@ -13,42 +14,51 @@ function Register() {
         password: '',
     });
 
-    const onFinish = () => {
-        fetch(server)
-            .then(response => response.json())
-            .then(users => {
-                const existingUser = users.find(user => user.email === formData.email);
+    const onFinish = async () => {
+        try {
+            const hashedPassword = await bcrypt.hash(formData.password, 10);
 
-                if (existingUser) {
-                    message.error("Користувач з такою поштою вже існує");
-                } else {
-                    const newUserId = users.length + 1;
-                    const newUser = { id: newUserId, ...formData };
+            const response = await fetch(server);
+            const users = await response.json();
 
-                    return fetch(server, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+            const existingUser = users.find(user => user.email === formData.email);
 
+            if (existingUser) {
+                message.error("Користувач з такою поштою вже існує");
+                setFormData(prevData => ({
+                    ...prevData,
+                    email: '',
+                    password: '',
+                }));
+            } else {
+                const newUserId = users.length + 1;
+                const newUser = {
+                    id: newUserId,
+                    name: formData.name,
+                    email: formData.email,
+                    password: hashedPassword,
+                };
 
-                        body: JSON.stringify(newUser),
+                const createUserResponse = await fetch(server, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newUser),
+                });
 
-                    });
-                }
-            })
-            .then(response => {
-                if (response && response.ok) {
+                if (createUserResponse.ok) {
                     message.success('Вітаємо! Ви успішно зареєструвались.');
                     navigate('/');
                 } else {
                     message.error("Не вдалося зареєструватись. Спробуйте ще раз");
                 }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
+
 
     const handleInputChange = e => {
         const { name, value } = e.target;

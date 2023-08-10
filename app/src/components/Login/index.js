@@ -2,6 +2,7 @@ import { Form, Input } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
+import bcrypt from 'bcryptjs';
 
 function Login() {
     const navigate = useNavigate();
@@ -17,23 +18,34 @@ function Login() {
         if (loggedInUser) navigate("/home");
     }, [navigate]);
 
-    const onFinish = (values) => {
+
+    const onFinish = () => {
         fetch(server)
             .then(response => response.json())
             .then(users => {
 
-                const foundUser = users.find(user => user.email === values.email && user.password === values.password);
-                const errorPassword = users.find(user => user.email === values.email && user.password !== values.password);
+                const foundUserEmail = users.find(user => user.email === formData.email);
+                const foundUserPassword = bcrypt.compareSync(formData.password, foundUserEmail.password)
+                const errorPassword = users.find(user => user.email === formData.email && user.password !== formData.password);
 
 
-                if (foundUser) {
+                if (foundUserEmail && foundUserPassword) {
                     message.success('Ви увійшли!');
-                    localStorage.setItem('loggedInUser', JSON.stringify(values));
+
+                    const userToStore = {
+                        email: foundUserEmail.email,
+                        password: foundUserEmail.password
+                    };
+
+                    localStorage.setItem('loggedInUser', JSON.stringify(userToStore));
                     navigate('/home');
                     clearFields();
                 } else if (errorPassword) {
                     message.error('Ви ввели невірний пароль!');
-                    setFormData({ ...formData, password: '' });
+                    setFormData(prevData => ({
+                        ...prevData,
+                        password: '', // не працює
+                    }));
                 } else {
                     message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
                     navigate('/register');
