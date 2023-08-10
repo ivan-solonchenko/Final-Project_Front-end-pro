@@ -21,8 +21,10 @@ function Login() {
         fetch(server)
             .then(response => response.json())
             .then(users => {
+
                 const foundUser = users.find(user => user.email === values.email && user.password === values.password);
                 const errorPassword = users.find(user => user.email === values.email && user.password !== values.password);
+
 
                 if (foundUser) {
                     message.success('Ви увійшли!');
