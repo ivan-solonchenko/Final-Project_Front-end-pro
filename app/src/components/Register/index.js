@@ -1,7 +1,6 @@
-import { Form, Input } from 'antd';
+import { Form, Input, message } from 'antd';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { message } from 'antd';
 import bcrypt from 'bcryptjs';
 
 function Register() {
@@ -14,8 +13,15 @@ function Register() {
         password: '',
     });
 
+    const [isPasswordValid, setIsPasswordValid] = useState(true);
+
     const onFinish = async () => {
         try {
+            if (!isPasswordValid) {
+                message.error('Пароль повинен містити щонайменше 6 символів');
+                return;
+            }
+
             const hashedPassword = await bcrypt.hash(formData.password, 10);
 
             const response = await fetch(server);
@@ -59,7 +65,6 @@ function Register() {
         }
     };
 
-
     const handleInputChange = e => {
         const { name, value } = e.target;
         setFormData(prevData => ({
@@ -68,6 +73,19 @@ function Register() {
         }));
     };
 
+    const handlePasswordChange = e => {
+        const newPassword = e.target.value;
+        setFormData(prevData => ({
+            ...prevData,
+            password: newPassword,
+        }));
+
+        if (newPassword.length >= 6) {
+            setIsPasswordValid(true);
+        } else {
+            setIsPasswordValid(false);
+        }
+    };
 
     return (
         <div className="login-content">
@@ -84,8 +102,12 @@ function Register() {
                     <Input type="email" name="email" value={formData.email} onChange={handleInputChange} />
                 </Form.Item>
                 <Form.Item label="Пароль" name="password" rules={[{ required: true, message: 'Будь ласка, введіть пароль' }]}>
-                    <Input.Password type="password" name="password" value={formData.password} onChange={handleInputChange} />
+                    <Input.Password type="password" name="password" value={formData.password} onChange={handlePasswordChange} />
                 </Form.Item>
+
+                {!isPasswordValid && (
+                    <p style={{ color: 'red' }}>Пароль повинен містити щонайменше 6 символів.</p>
+                )}
 
                 <button className="login-button" type="submit">Зареєструватися</button>
 
