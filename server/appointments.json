@@ -1,0 +1,21 @@
+[
+  {
+    "appointmentId": 1,
+    "doctorId": 2,
+    "userId": "Name1",
+    "bookingTime": "",
+    "date": 20, 
+    "day": "monday"
+    
+  },
+  {
+    "id": 2,
+    "Name": "Name2",
+    "Age": 40
+  },
+  {
+    "id": 3,
+    "Name": "Name3",
+    "Age": 30
+  }
+]
