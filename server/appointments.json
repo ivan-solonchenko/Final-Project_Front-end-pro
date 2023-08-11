@@ -1,21 +1,62 @@
 [
   {
-    "appointmentId": 1,
-    "doctorId": 2,
-    "userId": "Name1",
-    "bookingTime": "",
-    "date": 20, 
-    "day": "monday"
-    
+    "appointmentId": "0bf55f86-4ef7-4430-a33d-7390d9b6f44a",
+    "bookingTimeInfo": "2023-08-15T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 3,
+    "userId": 5,
+    "doctorId": "2",
+    "bookingTimeRadio": "13:00-14:00"
   },
   {
-    "id": 2,
-    "Name": "Name2",
-    "Age": 40
+    "appointmentId": "05595922-9354-470f-a780-4f436a7c9bd3",
+    "bookingTimeInfo": "2023-08-17T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 5,
+    "userId": 5,
+    "doctorId": "2",
+    "bookingTimeRadio": "17:00-18:00"
   },
   {
-    "id": 3,
-    "Name": "Name3",
-    "Age": 30
+    "appointmentId": "e0de54bc-93fc-4df3-8762-84b656a1be22",
+    "bookingTimeInfo": "2023-08-14T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 2,
+    "userId": 5,
+    "doctorId": "3",
+    "bookingTimeRadio": "11:00-12:00"
+  },
+  {
+    "appointmentId": "7d801c5a-d9ce-43f9-a2cb-a04cf2c9257f",
+    "bookingTimeInfo": "2023-08-13T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 1,
+    "userId": 5,
+    "doctorId": "2",
+    "bookingTimeRadio": "15:00-16:00"
+  },
+  {
+    "appointmentId": "8de62c9e-1473-4103-a746-0c0f58c28de8",
+    "bookingTimeInfo": "2023-08-13T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 1,
+    "userId": 5,
+    "doctorId": "2",
+    "bookingTimeRadio": "16:00-17:00"
+  },
+  {
+    "appointmentId": "37435cc0-b005-4005-a285-27259aae5417",
+    "bookingTimeInfo": "2023-08-13T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 1,
+    "userId": 5,
+    "doctorId": "2",
+    "bookingTimeRadio": "14:00-15:00"
   }
 ]

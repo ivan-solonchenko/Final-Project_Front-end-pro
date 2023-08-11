@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 
 const doctors = 'doctors.json';
 const users = 'users.json';
+const appointments = 'appointments.json';
 
 app.get('/api/doctors', (req, res) => {
     fs.readFile(doctors, 'utf8', (err, data) => {
@@ -31,6 +32,18 @@ app.get('/api/doctors', (req, res) => {
 
 app.get('/api/users', (req, res) => {
     fs.readFile(users, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Server error' });
+        } else {
+            const jsonData = JSON.parse(data);
+            res.json(jsonData);
+        }
+    });
+});
+
+app.get('/api/appointments', (req, res) => {
+    fs.readFile(appointments, 'utf8', (err, data) => {
         if (err) {
             console.error(err);
             res.status(500).json({ error: 'Server error' });
@@ -81,6 +94,29 @@ app.post('/api/users', (req, res) => {
                     res.status(500).json({ error: 'Server error' });
                 } else {
                     res.json({ message: 'Data added' });
+                }
+            })
+        }
+    })
+});
+
+app.post('/api/appointments', (req, res) => {
+    fs.readFile(appointments, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Server error' });
+        } else {
+            const jsonData = JSON.parse(data);
+            jsonData.push(req.body);
+
+            const updateData = JSON.stringify(jsonData, null, 2);
+
+            fs.writeFile(appointments, updateData, 'utf8', (err) => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).json({ error: 'Server error' });
+                } else {
+                    res.json({ message: 'Appointment added' });
                 }
             })
         }

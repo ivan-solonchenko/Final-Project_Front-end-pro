@@ -9,34 +9,81 @@ function Appointments() {
 	//params, variables , ref, state
 	let { id } = useParams();
 	let defaulDate = new Date();
+	let userId = 5;
 	let refBookingTime = createRef();
 	let refIssue = createRef();
 	const [info, setInfo] = useState(null);
 	const [date, setDate] = useState(null);
+	const [appointmentsInfo, setAppointmentsInfo] = useState(null);
 	const [bookingTime, setBookingTime] = useState(null);
 	const [weekDay, setWeekDay] = useState(defaulDate.getDay());
+	const [appointmentData, setAppointmentData] = useState(null)
+	function fetchDoctor() {
+		fetch('http://localhost:8080/api/doctors')
+			.then(response => response.json())
+			.then(data => setInfo(data.filter(doctor => doctor.id === +id)))
+			.catch((error) => console.log('Error:', error))
+	}
 
-	async function fetchDoctor() {
-		const response = await fetch('http://localhost:8080/api/doctors')
-		const data = await response.json();
-		setInfo(data.filter(doctor => doctor.id === +id))
+	function fetchAppointments() {
+		fetch('http://localhost:8080/api/appointments')
+			.then(response => response.json())
+			.then(data => setAppointmentsInfo(data.filter(appointment => appointment.userId === userId && appointment.doctorId === id && appointment.bookingDay === date.getDay() && appointment.bookingMounth === date.getMonth())))
+			.catch((error) => console.log('Error:', error))
+	}
+
+	function postAppointment(payload) {
+		fetch('http://localhost:8080/api/appointments', {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify(payload)
+		})
+			.then(response => response.json())
+			.then(data => console.log(data))
+			.catch((error) => console.log('Error:', error))
 	}
 
 	useEffect(() => {
 		fetchDoctor();
 	}, [id]);
 
+	useEffect(() => {
+		if (date) {
+			fetchAppointments();
+		}
+	}, [date]);
+
 	function displayDates() {
 		if (date.getDay() > 0 && date.getDay() < 6) {
 			let time = ["10:00-11:00", "11:00-12:00", "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00"]
-			return time.map((time, index) => <label for={time}><input type="radio" className="bookin-appointmens__time" id={time} key={index} ref={refBookingTime} name="bookingTime" value={time} onClick={(e) => setBookingTime(e.target.value)} /> {time}</label>)
+			let fetchedData = [];
+			appointmentsInfo ? appointmentsInfo.map(appointment => fetchedData.push(appointment.bookingTimeRadio)) : console.log(false);
+			const commonArray = time.filter(item => !fetchedData.includes(item));
+			return commonArray.map((time, index) => <label for={time}><input type="radio" className="bookin-appointmens__time" id={time} key={index} ref={refBookingTime} name="bookingTime" value={time} onClick={(e) => setBookingTime(e.target.value)} /> {time}</label>)
 		} else {
-			return <p> day is nt alailable</p>
+			return <p>Day is nt alailable</p>
 		}
+	}
+	console.log(appointmentsInfo);
+	console.log();
+	function doAppointment() {
+		let apObj = {
+			appointmentId: crypto.randomUUID(),
+			bookingTimeInfo: date,
+			bookingYear: date.getFullYear(),
+			bookingMounth: date.getMonth(),
+			bookingDay: date.getDay(),
+			userId: 5, /// should be parsed from json 
+			doctorId: id, /// from params
+			bookingTimeRadio: bookingTime,
+		}
+		postAppointment(apObj);
 	}
 
 	function displayButton() {
-		return <div><button className="doctors-appoitments__button button-15" >Collect</button></div>
+		return <div><button className="doctors-appoitments__button button-15" onClick={doAppointment}>Book Appoitment</button></div>
 	}
 	return (
 
