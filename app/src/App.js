@@ -1,21 +1,60 @@
-
 import './App.css';
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Appointments from './components/appointments/index';
-import Doctors from './components/main/Doctors';
 
 function App() {
-  return (
-    
-    <div >
-      <BrowserRouter>
-      <Routes>
-      <Route path='/doctors' element={<Doctors/>} />
-      <Route path='/appointments/:id' element={<Appointments/>} />
-      </Routes>
-      </BrowserRouter>
-    </div>
-  );
+    return (
+        <div>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+                <Route path='/appointments/:id' element={<Appointments/>} />
+              </Routes>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;
+
+
+
+// // App.js
+// import React, { useState } from 'react';
+// import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+// import LoginForm from './LoginForm';
+// import RegistrationForm from './RegistrationForm';
+// import data from './data.json';
+//
+// const App = () => {
+//     const [users, setUsers] = useState(data);
+//
+//     const addUser = (user) => {
+//         const newUser = { ...user, id: users.length + 1 };
+//         setUsers([...users, newUser]);
+//     };
+//
+//     return (
+//         <Router>
+//             <Switch>
+//                 <Route exact path="/">
+//                     <Redirect to="/login" />
+//                 </Route>
+//                 <Route path="/login">
+//                     <LoginForm users={users} />
+//                 </Route>
+//                 <Route path="/register">
+//                     <RegistrationForm addUser={addUser} />
+//                 </Route>
+//             </Switch>
+//         </Router>
+//     );
+// };
+//
+// export default App;

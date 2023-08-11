@@ -1,0 +1,51 @@
+body,
+html {
+    background-color: #e4e4e4;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, a, span, p {
+    color: #363636;
+}
+
+.myLink:hover {
+    color: #599150;
+}
+
+.login-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-form {
+    width: 400px;
+    padding: 20px;
+    background: white;
+}
+
+.login-form-title {
+    margin: 20px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.no-star .ant-form-item-required:before {
+    display: none !important;
+}
+
+.login-button {
+    height: 45px;
+    width: 100%;
+    margin: 10px 0;
+    padding: 0 20px;
+    border-radius: 0;
+    color: white;
+    background-color: black;
+    text-transform: uppercase;
+}
+
+.login-button:hover {
+    background-color: #0e0e0e;
+}
