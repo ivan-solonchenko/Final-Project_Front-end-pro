@@ -8,6 +8,10 @@ h1, h2, h3, h4, h5, h6, a, span, p {
     color: #363636;
 }
 
+.myLink:hover {
+    color: #599150;
+}
+
 .login-content {
     display: flex;
     justify-content: center;

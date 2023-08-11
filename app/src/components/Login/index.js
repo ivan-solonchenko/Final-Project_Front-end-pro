@@ -6,20 +6,43 @@ import bcrypt from 'bcryptjs';
 function Login() {
     const navigate = useNavigate();
     const server = 'http://localhost:8080/api/users';
+    const [isPasswordValid, setIsPasswordValid] = useState(true);
 
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
 
-    const [isPasswordValid, setIsPasswordValid] = useState(true);
-
     useEffect(() => {
         const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
         if (loggedInUser) navigate("/home");
     }, [navigate]);
 
-    const onFinish = async () => {
+    const handleInputChange = e => {
+        const { name, value } = e.target;
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: value,
+        }));
+
+        if (name === "password") {
+            if (value.length >= 6) {
+                setIsPasswordValid(true);
+            } else {
+                setIsPasswordValid(false);
+            }
+        }
+    };
+
+    const clearFields = () => {
+        setFormData({
+            email: '',
+            password: '',
+        });
+        setIsPasswordValid(true);
+    };
+
+    const handleLogin  = async () => {
         try {
             if (!isPasswordValid) {
                 message.error('Пароль повинен містити щонайменше 6 символів');
@@ -47,6 +70,7 @@ function Login() {
                     clearFields();
                 } else {
                     message.error('Ви ввели невірний пароль!');
+                    // setFormData(formData.password = '')//////////////////////////////
                 }
             } else {
                 message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
@@ -57,57 +81,26 @@ function Login() {
         }
     };
 
-    const handleInputChange = e => {
-        const { name, value } = e.target;
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
-
-    const handlePasswordChange = e => {
-        const newPassword = e.target.value;
-        setFormData(prevData => ({
-            ...prevData,
-            password: newPassword,
-        }));
-
-        if (newPassword.length >= 6) {
-            setIsPasswordValid(true);
-        } else {
-            setIsPasswordValid(false);
-        }
-    };
-
-    const clearFields = () => {
-        setFormData({
-            email: '',
-            password: '',
-        });
-        setIsPasswordValid(true);
-    };
 
     return (
         <div className="login-content">
-            <Form layout="vertical" className="login-form" onFinish={onFinish}>
+            <Form layout="vertical" className="login-form" onFinish={handleLogin }>
                 <h2 className="login-form-title">Вхід
                     <hr />
                 </h2>
-                <Form.Item label="Email" className={"no-star"} name="email" rules={[{ required: true, message: 'Будь ласка, введіть email' }]}>
-                    <Input type="email"  name="email" value={formData.email} onChange={handleInputChange} />
+                <Form.Item label="Email" className={"no-star"} name="email"
+                           rules={[{ required: true, message: 'Будь ласка, введіть email' }]}>
+                    <Input type="email"  name="email" value={formData.email} onChange={handleInputChange} autoComplete="email"/>
                 </Form.Item>
                 <Form.Item label="Пароль" className={"no-star"} name="password" rules={[{ required: true, message: 'Будь ласка, введіть пароль' }]}>
-                    <Input.Password type="password" name="password" value={formData.password} onChange={handlePasswordChange} />
+                    <Input.Password type="password" name="password" value={formData.password} onChange={handleInputChange} autoComplete="current-password"/>
                 </Form.Item>
-                {!isPasswordValid && (
-                    <p style={{ color: 'red' }}>Пароль повинен містити щонайменше 6 символів.</p>
-                )}
                 <Form.Item>
-                    <button className="login-button" type="submit" disabled={!isPasswordValid}>
+                    <button className="login-button" type="submit" >
                         Увійти
                     </button>
                 </Form.Item>
-                <Link to="/register">
+                <Link className={"myLink"} to="/register">
                     Не маєте облікового запису? <strong>Зареєструватися</strong>
                 </Link>
             </Form>
