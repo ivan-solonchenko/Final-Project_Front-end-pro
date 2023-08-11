@@ -6,19 +6,61 @@ const ApplyDoctorForm = () => {
   const [experience, setExperience] = useState("");
   const [education, setEducation] = useState("");
   const [previousWorkplace, setPreviousWorkplace] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // тут я добавлю код для отправки на сервер потом как-то
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
 
-    //  localstorage.getitem(user)
+    // Тут я добавлю код для отправки на сервер
+    //  const createDocResponse = await fetch (server,
+    //  init:
+    //   method: 'POST',
+    //   headers: {
+    //  *Content- Type': 'application/json'
+    //  }
+    // body: JSON. stringify (newDoc),
+    // H;
+    // if (createDocResponse.ok) {
+    // message. success ( content: 'Bravo.You successfully apllied as a doctor');
+    // navigate('/');
+    // } else {
+    //  message. error ( content: "Oops , something went wrong , please try again");
 
     setFullName("");
     setAge("");
     setExperience("");
     setEducation("");
     setPreviousWorkplace("");
+    setEmail("");
+    setEmailError("");
+  };
+
+  const handleFullNameChange = (e) => {
+    if (!/\d/.test(e.target.value)) {
+      setFullName(e.target.value);
+    }
+  };
+
+  const handleAgeChange = (e) => {
+    if (!isNaN(e.target.value)) {
+      setAge(e.target.value);
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setEmailError("");
+  };
+
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
   };
 
   return (
@@ -29,7 +71,7 @@ const ApplyDoctorForm = () => {
           type="text"
           id="fullName"
           value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
+          onChange={handleFullNameChange}
           required
         />
       </div>
@@ -40,7 +82,7 @@ const ApplyDoctorForm = () => {
           type="number"
           id="age"
           value={age}
-          onChange={(e) => setAge(e.target.value)}
+          onChange={handleAgeChange}
           required
         />
       </div>
@@ -76,6 +118,18 @@ const ApplyDoctorForm = () => {
           onChange={(e) => setPreviousWorkplace(e.target.value)}
           required
         />
+      </div>
+
+      <div>
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={handleEmailChange}
+          required
+        />
+        {emailError && <p style={{ color: "red" }}>{emailError}</p>}
       </div>
 
       <button type="submit">Submit</button>
