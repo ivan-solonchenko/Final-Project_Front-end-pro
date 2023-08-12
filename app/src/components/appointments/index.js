@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import React, { createRef, useEffect, useRef, useState } from "react";
 import { Calendar } from 'primereact/calendar'
 import './index.css';
@@ -8,8 +8,10 @@ import "primereact/resources/primereact.min.css"
 function Appointments() {
 	//params, variables , ref, state
 	let { id } = useParams();
+	let navigate = useNavigate();
 	let defaulDate = new Date();
-	let userId = 5;
+	let user = JSON.parse(localStorage.getItem('loggedInUser'));
+	let userId = user.email
 	let refBookingTime = createRef();
 	let refIssue = createRef();
 	const [info, setInfo] = useState(null);
@@ -75,11 +77,13 @@ function Appointments() {
 			bookingYear: date.getFullYear(),
 			bookingMounth: date.getMonth(),
 			bookingDay: date.getDay(),
-			userId: 5, /// should be parsed from json 
+			userId: userId, /// should be parsed from json 
 			doctorId: id, /// from params
 			bookingTimeRadio: bookingTime,
 		}
 		postAppointment(apObj);
+
+		navigate('/doctors');
 	}
 
 	function displayButton() {
@@ -89,8 +93,8 @@ function Appointments() {
 
 		info && <div className="doctors-appoitments">
 			<a href="/doctors">return</a>
-			<h1 className="doctors-appoitments__title">Params = {id} {info[0].Name}</h1>
-			<div className="doctors-appoitments__wrap">
+			<h1 className="doctors-appoitments__title text-title">Params = {id} {info[0].Name}</h1>
+			<div className="doctors-appoitments__wrap small-form">
 				<div className="doctors-appoitments__item">
 					<span className="doctors-appoitments__text">Age:</span> 	<span className="doctors-appoitments__info">{info[0].id}</span>
 				</div>
