@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Appointments from './components/appointments/index';
+import Admin from "./components/Admin";
 
 function App() {
     return (
@@ -12,9 +13,10 @@ function App() {
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/register" element={<Register />}/>
                 <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
                 <Route path='/appointments/:id' element={<Appointments/>} />
+                <Route path='/admin' element={<ProtectedRoute><Admin /></ProtectedRoute>} />
               </Routes>
             </BrowserRouter>
         </div>
