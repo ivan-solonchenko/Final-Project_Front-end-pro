@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import React, { createRef, useEffect, useRef, useState } from "react";
 import { Calendar } from 'primereact/calendar'
+import { message } from 'antd';
 import './index.css';
 import "primereact/resources/themes/lara-light-indigo/theme.css"
 import "primereact/resources/primereact.min.css"
@@ -31,7 +32,7 @@ function Appointments() {
 		fetch('http://localhost:8080/api/appointments')
 			.then(response => response.json())
 			.then(data => setAppointmentsInfo(data.filter(appointment => appointment.userId === userId && appointment.doctorId === id && appointment.bookingDay === date.getDay() && appointment.bookingMounth === date.getMonth())))
-			.catch((error) => console.log('Error:', error))
+			.catch((error) => message.error('щось пішло не так'))
 	}
 
 	function postAppointment(payload) {
