@@ -1,31 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500&display=swap');
-
-
-/* @import url('components/Login/index.css');
-@import url('components/Register/index.css'); */
-
-text { 
-	
-}
+@import url('components/Login/index.css');
 
 body {
-	font-family: 'Montserrat', sans-serif;
-	/* color: #F1E0D6; */
+    background-color: #e4e4e4;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.text-title { /* h1 */
-	font-style: italic;
-	font-size: 48px;
-}
-form { 
-	background-color: #583E2E;
-}
-
-.small-form {
-	background-color: #ABA6BF;
-	color: #583E2E;
-}
-
-button {
-	
+h1, h2, h3, h4, h5, h6, a, span, p {
+    color: #363636;
 }

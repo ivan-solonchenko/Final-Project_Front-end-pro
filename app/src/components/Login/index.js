@@ -14,8 +14,14 @@ function Login() {
     });
 
     useEffect(() => {
-        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-        if (loggedInUser) navigate("/home");
+        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+        if (loggedInUser) {
+            if (loggedInUser.role === 'admin') {
+                navigate('/admin');
+            } else {
+                navigate('/home');
+            }
+        }
     }, [navigate]);
 
     const handleInputChange = e => {
@@ -25,7 +31,7 @@ function Login() {
             [name]: value,
         }));
 
-        if (name === "password") {
+        if (name === 'password') {
             if (value.length >= 6) {
                 setIsPasswordValid(true);
             } else {
@@ -42,66 +48,91 @@ function Login() {
         setIsPasswordValid(true);
     };
 
-    const handleLogin  = async () => {
-        try {
-            if (!isPasswordValid) {
-                message.error('Пароль повинен містити щонайменше 6 символів');
-                return;
-            }
+    const handleLogin = () => {
+        if (!isPasswordValid) {
+            message.error('Пароль повинен містити щонайменше 6 символів');
+            return;
+        }
 
-            const response = await fetch(server);
-            const users = await response.json();
+        fetch(server)
+            .then(response => response.json())
+            .then(users => {
+                const foundUser = users.find(user => user.email === formData.email);
 
-            const foundUser = users.find(user => user.email === formData.email);
+                if (foundUser) {
+                    const isPasswordValid = bcrypt.compareSync(formData.password, foundUser.password);
 
-            if (foundUser) {
-                const isPasswordValid = bcrypt.compareSync(formData.password, foundUser.password);
-
-                if (isPasswordValid) {
-                    message.success('Ви увійшли!');
+                    if (isPasswordValid) {
+                        message.success('Ви увійшли!');
 
                     const userToStore = {
                         email: foundUser.email,
                         password: foundUser.password,
-                        id: foundUser.id,
                     };
 
-                    localStorage.setItem('loggedInUser', JSON.stringify(userToStore));
-                    navigate('/home');
-                    clearFields();
-                } else {
-                    message.error('Ви ввели невірний пароль!');
-                    // setFormData(formData.password = '')//////////////////////////////
-                }
-            } else {
-                message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
-                navigate('/register');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
+                        localStorage.setItem('loggedInUser', JSON.stringify(userToStore));
 
+                        if (foundUser.role === 'admin') {
+                            navigate('/admin');
+                        } else {
+                            navigate('/home');
+                        }
+                        clearFields();
+                    } else {
+                        message.error('Ви ввели невірний пароль!');
+                    }
+                } else {
+                    message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
+                    navigate('/register');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    };
 
     return (
         <div className="login-content">
-            <Form layout="vertical" className="login-form" onFinish={handleLogin }>
-                <h2 className="login-form-title">Вхід
+            <Form className="login-form"
+                  layout="vertical"
+                  onFinish={handleLogin}
+            >
+                <h2 className="login-form__title">Вхід
                     <hr />
                 </h2>
-                <Form.Item label="Email" className={"no-star"} name="email"
+
+                <Form.Item className={'no-star'}
+                           label="Email"
+                           name="email"
                            rules={[{ required: true, message: 'Будь ласка, введіть email' }]}>
-                    <Input type="email"  name="email" value={formData.email} onChange={handleInputChange} autoComplete="email"/>
+                    <Input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        autoComplete="email"/>
                 </Form.Item>
-                <Form.Item label="Пароль" className={"no-star"} name="password" rules={[{ required: true, message: 'Будь ласка, введіть пароль' }]}>
-                    <Input.Password type="password" name="password" value={formData.password} onChange={handleInputChange} autoComplete="current-password"/>
+                <Form.Item className={'no-star'}
+                           label="Пароль"
+                           name="password"
+                           rules={[{ required: true, message: 'Будь ласка, введіть пароль' }]}>
+                    <Input.Password
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        autoComplete="current-password"/>
                 </Form.Item>
                 <Form.Item>
-                    <button className="login-button" type="submit" >
+                    <button className="login-form__button"
+                            type="submit"
+                    >
                         Увійти
                     </button>
                 </Form.Item>
-                <Link className={"myLink"} to="/register">
+                <Link className={'login-form__link'}
+                      to="/register"
+                >
                     Не маєте облікового запису? <strong>Зареєструватися</strong>
                 </Link>
             </Form>
