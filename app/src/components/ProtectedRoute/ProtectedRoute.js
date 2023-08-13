@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
     const navigate = useNavigate();
-    let user = localStorage.getItem('loggedInUser')
+
     useEffect(() => {
         const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-
         if (!loggedInUser) {
             navigate('/');
-        } else if (loggedInUser.role === 'admin') {
-            navigate('/admin');
         }
-    }, [navigate]);
+    }, []);
+
+    const user = JSON.parse(localStorage.getItem('loggedInUser'))
 
     return (
         <div className='parent-page'>
@@ -20,12 +19,31 @@ function ProtectedRoute({ children }) {
                 <h1 className='parent-page__title'>
                     <span className='parent-page__blue'>Medi</span> <span className='parent-page__yellow'>Cover</span>
                 </h1>
-                {user && (<div>
-                    <h3 className='parent-page__appointments' onClick={navigate('/doctors')}>Appointments</h3>
+                <div className='parent-page__item'>
+                    {user.role === "user" && (
+                        <h3 onClick={() => {
+                            navigate('/doctors')
+                        }}>
+                            Doctors
+                        </h3>
+                    )}
+                </div>
+                <div className='parent-page__item'>
+                    {user.role === "admin" && (
+                        <h3 onClick={() => {
+                            navigate('/doctors')
+                        }}>
+                            Admin page functions
+                        </h3>
+                    )}
+                </div>
+                {user && (<div className='parent-page__item'>
                     <h3 onClick={() => {
-                        navigate('/')
                         localStorage.removeItem('loggedInUser')
-                    }}><img src="../../pictures/logout.png" alt="LogOut" /></h3>
+                        navigate('/')
+                    }}>
+                        LogOut
+                    </h3>
                 </div>)}
             </div>
             <div>{children}</div>

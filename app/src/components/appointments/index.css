@@ -1,32 +1,24 @@
 * { 
 	/* double split complementary */
-	box-sizing: border-box;
-	color: #F1E0D6;
-}
-
-body {
 
 }
+
 .doctors-appoitments{
-	width: 95%;
-	margin: 0 auto;	
-	background-color: #583E2E;
-	padding: 20px;
+	background-color: #fff;
+	padding: 10px 20px;
 	border-radius: 10px;
 }
 .doctors-appoitments__title {
-	text-align: center;
-	border-bottom: 2px solid #F1E0D6;
+	
+	border-bottom: 2px solid grey;
 	/* top | right | bottom | left */
 	text-transform: uppercase;
 }
 
 .doctors-appoitments__wrap {
 	width: 25%;
-	background-color: #ABA6BF;
 	border-radius: 10px;
 	text-transform: uppercase;
-	color: #583E2E;
 }
 
 .doctors-appoitments__item {
@@ -38,8 +30,6 @@ body {
 	width: 100%;
 	/* top | right | bottom | left */
 	padding: 5px 20px 5px 2px;
-	border-bottom: 2px solid #5F89E8;
-	border-radius: 10px;
 	color: #583E2E ;
 }
 

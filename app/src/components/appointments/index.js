@@ -70,6 +70,7 @@ function Appointments() {
 	console.log(appointmentsInfo);
 	console.log();
 	function doAppointment() {
+
 		let apObj = {
 			appointmentId: crypto.randomUUID(),
 			bookingTimeInfo: date,
@@ -81,16 +82,16 @@ function Appointments() {
 			userEmail: user.email,
 			bookingTimeRadio: bookingTime,
 		}
-		postAppointment(apObj);
 
+		postAppointment(apObj);
 		navigate('/doctors');
 	}
 
 	function displayButton() {
 		return <div><button className="doctors-appoitments__button button-15" onClick={doAppointment}>Book Appoitment</button></div>
 	}
+	
 	return (
-
 		info && <div className="doctors-appoitments">
 			<a href="/doctors">return</a>
 			<h1 className="doctors-appoitments__title text-title">Params = {id} {info[0].Name}</h1>

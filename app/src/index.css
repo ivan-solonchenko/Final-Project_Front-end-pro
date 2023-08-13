@@ -10,12 +10,24 @@ h1, h2, h3, h4, h5, h6, a, span, p {
     color: #363636;
 }
 
-
-
-
 /* Parent page made by Yershov Artem */
 
 .parent-page__nav {
     display: flex;
-    
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 5px 20px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.parent-page__item {
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+
+.parent-page__item:hover {
+    text-decoration: none;
 }
