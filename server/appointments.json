@@ -18,5 +18,15 @@
     "userId": "userIvan@gmail.com",
     "doctorId": "2",
     "bookingTimeRadio": "17:00-18:00"
+  },
+  {
+    "appointmentId": "64b739d3-240c-4f08-8b71-e78fa91f9bfe",
+    "bookingTimeInfo": "2023-08-13T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 1,
+    "userId": "userIvan@gmail.com",
+    "doctorId": "2",
+    "bookingTimeRadio": "14:00-15:00"
   }
 ]
