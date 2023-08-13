@@ -98,7 +98,7 @@ function Login() {
                   layout="vertical"
                   onFinish={handleLogin}
             >
-                <h2 className="login-form-title">Вхід
+                <h2 className="login-form__title">Вхід
                     <hr />
                 </h2>
 
@@ -125,13 +125,13 @@ function Login() {
                         autoComplete="current-password"/>
                 </Form.Item>
                 <Form.Item>
-                    <button className="login-button"
+                    <button className="login-form__button"
                             type="submit"
                     >
                         Увійти
                     </button>
                 </Form.Item>
-                <Link className={'myLink'}
+                <Link className={'login-form__link'}
                       to="/register"
                 >
                     Не маєте облікового запису? <strong>Зареєструватися</strong>

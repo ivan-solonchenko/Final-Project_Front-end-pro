@@ -109,7 +109,7 @@ function Register() {
                   layout="vertical"
                   onFinish={handleRegister}
             >
-                <h2 className="login-form-title">Реєстрація
+                <h2 className="login-form__title">Реєстрація
                     <hr />
                 </h2>
 
@@ -155,13 +155,13 @@ function Register() {
                 </Form.Item>
                 <Form.Item>
                     <button
-                        className="login-button"
+                        className="login-form__button"
                         type="submit"
                     >
                         Зареєструватися
                     </button>
                 </Form.Item>
-                <Link className={"myLink"}
+                <Link className={"login-form__link"}
                       to="/"
                 >
                     Вже є обліковий запис. <strong>Увійти</strong>
