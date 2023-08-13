@@ -68,6 +68,7 @@ function Login() {
                     const userToStore = {
                         email: foundUser.email,
                         password: foundUser.password,
+                        role: foundUser.role,
                     };
 
                         localStorage.setItem('loggedInUser', JSON.stringify(userToStore));

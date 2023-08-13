@@ -10,17 +10,15 @@ function Appointments() {
 	//params, variables , ref, state
 	let { id } = useParams();
 	let navigate = useNavigate();
-	let defaulDate = new Date();
 	let user = JSON.parse(localStorage.getItem('loggedInUser'));
-	let userId = user.email
+	let userId = user.id;
+	let userEmail = user.email;
 	let refBookingTime = createRef();
-	let refIssue = createRef();
 	const [info, setInfo] = useState(null);
 	const [date, setDate] = useState(null);
 	const [appointmentsInfo, setAppointmentsInfo] = useState(null);
 	const [bookingTime, setBookingTime] = useState(null);
-	const [weekDay, setWeekDay] = useState(defaulDate.getDay());
-	const [appointmentData, setAppointmentData] = useState(null)
+
 	function fetchDoctor() {
 		fetch('http://localhost:8080/api/doctors')
 			.then(response => response.json())
@@ -31,7 +29,7 @@ function Appointments() {
 	function fetchAppointments() {
 		fetch('http://localhost:8080/api/appointments')
 			.then(response => response.json())
-			.then(data => setAppointmentsInfo(data.filter(appointment => appointment.userId === userId && appointment.doctorId === id && appointment.bookingDay === date.getDay() && appointment.bookingMounth === date.getMonth())))
+			.then(data => setAppointmentsInfo(data.filter(appointment => appointment.email === userEmail && appointment.doctorId === id && appointment.bookingDay === date.getDay() && appointment.bookingMounth === date.getMonth())))
 			.catch((error) => message.error('щось пішло не так'))
 	}
 
@@ -80,6 +78,7 @@ function Appointments() {
 			bookingDay: date.getDay(),
 			userId: userId, /// should be parsed from json 
 			doctorId: id, /// from params
+			userEmail: user.email,
 			bookingTimeRadio: bookingTime,
 		}
 		postAppointment(apObj);
