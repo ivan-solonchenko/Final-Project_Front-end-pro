@@ -28,5 +28,75 @@
     "doctorId": "1",
     "userEmail": "userIvan@gmail.com",
     "bookingTimeRadio": "16:00-17:00"
+  },
+  {
+    "appointmentId": "081641cb-25cf-4c2a-a90b-895a36d602bf",
+    "bookingTimeInfo": "2023-08-17T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 5,
+    "doctorId": "1",
+    "userEmail": "userIvan@gmail.com",
+    "bookingTimeRadio": "14:00-15:00"
+  },
+  {
+    "appointmentId": "900b9a5e-64ac-4f15-9dde-770ed9ddcf29",
+    "bookingTimeInfo": "2023-08-15T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 3,
+    "doctorId": "3",
+    "userEmail": "userIvan@gmail.com",
+    "bookingTimeRadio": "11:00-12:00"
+  },
+  {
+    "appointmentId": "73dca03a-92f2-4ff3-a189-3fd633506a64",
+    "bookingTimeInfo": "2023-08-15T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 3,
+    "doctorId": "3",
+    "userEmail": "userIvan@gmail.com",
+    "bookingTimeRadio": "13:00-14:00"
+  },
+  {
+    "appointmentId": "27b7ab3d-cf1e-4c9f-becb-c898c5066d5f",
+    "bookingTimeInfo": "2023-08-14T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 2,
+    "doctorId": "3",
+    "userEmail": "userIvan@gmail.com",
+    "bookingTimeRadio": "13:00-14:00"
+  },
+  {
+    "appointmentId": "3a992699-8c8a-431d-8066-59b4113d5b95",
+    "bookingTimeInfo": "2023-08-15T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 3,
+    "doctorId": "3",
+    "userEmail": "userIvan@gmail.com",
+    "bookingTimeRadio": "11:00-12:00"
+  },
+  {
+    "appointmentId": "c4c6c185-47cb-4c7f-8fd6-68e1b51a51c1",
+    "bookingTimeInfo": "2023-08-16T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 4,
+    "doctorId": "3",
+    "userEmail": "userIvan@gmail.com",
+    "bookingTimeRadio": "11:00-12:00"
+  },
+  {
+    "appointmentId": "e9df6b22-0172-4dc8-8b70-09fdcd7b04fc",
+    "bookingTimeInfo": "2023-08-15T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": 7,
+    "bookingDay": 3,
+    "doctorId": "3",
+    "userEmail": "userIvan@gmail.com",
+    "bookingTimeRadio": "14:00-15:00"
   }
 ]
