@@ -5,13 +5,9 @@ import bcrypt from 'bcryptjs';
 
 function LoginForm() {
     const navigate = useNavigate();
-    const server = 'http://localhost:8080/api/users';
     const [isPasswordValid, setIsPasswordValid] = useState(false);
-
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    });
+    const [emailValue, setEmailValue] = useState('');
+    const [passwordValue, setPasswordValue] = useState('');
 
     function addUserToStore(user) {
         const userToStore = {
@@ -31,53 +27,30 @@ function LoginForm() {
         }
     }
 
-    function handleInputChange(e) {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-
-        if (name === 'password') {
-            setIsPasswordValid(value.length >= 6);
-        }
-    }
-
-    function clearFields() {
-        setFormData({
-            email: '',
-            password: '',
-        });
-        setIsPasswordValid(false);
-    }
-
     function handleLogin() {
         if (!isPasswordValid) {
             message.error('Пароль повинен містити щонайменше 6 символів');
             return;
         }
 
-        fetch(server)
+        fetch('http://localhost:8080/api/users')
             .then((response) => response.json())
             .then((users) => {
-                const foundUser = users.find((user) => user.email === formData.email);
+                const foundUser = users.find((user) => user.email === emailValue);
 
                 if (foundUser) {
-                    const isPasswordValid = bcrypt.compareSync(formData.password, foundUser.password);
+                    const isPasswordValid = bcrypt.compareSync(passwordValue, foundUser.password);
 
                     if (isPasswordValid) {
                         message.success('Ви увійшли!');
                         addUserToStore(foundUser);
                         navigateTheUser(foundUser);
-                        clearFields();
                     } else {
-                        document.getElementById('password').value = '';
                         message.error('Ви ввели невірний пароль!');
+                        setPasswordValue('');
                     }
                 } else {
-                    message.error(
-                        'Користувача з таким email та паролем не знайдено. Зареєструйтесь!'
-                    );
+                    message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
                     navigate('/register');
                 }
             })
@@ -104,8 +77,8 @@ function LoginForm() {
                     <Input
                         type="email"
                         name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
+                        value={emailValue}
+                        onChange={(e) => setEmailValue(e.target.value)}
                         autoComplete="email"
                     />
                 </Form.Item>
@@ -116,11 +89,13 @@ function LoginForm() {
                     rules={[{ required: true, message: 'Будь ласка, введіть пароль' }]}
                 >
                     <Input.Password
-                        id="password"
                         type="password"
                         name="password"
-                        value={formData.password}
-                        onChange={handleInputChange}
+                        value={passwordValue}
+                        onChange={(e) => {
+                            setPasswordValue(e.target.value);
+                            setIsPasswordValid(e.target.value.length >= 6);
+                        }}
                         autoComplete="current-password"
                     />
                 </Form.Item>

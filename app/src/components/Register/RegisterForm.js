@@ -5,43 +5,23 @@ import bcrypt from 'bcryptjs';
 
 const RegisterForm = () => {
     const navigate = useNavigate();
-    const server = 'http://localhost:8080/api/users';
     const [isPasswordValid, setIsPasswordValid] = useState(false);
+    const [nameValue, setNameValue] = useState('');
+    const [emailValue, setEmailValue] = useState('');
+    const [passwordValue, setPasswordValue] = useState('');
 
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-    });
-
-    function handleInputChange(e) {
-        const { name, value } = e.target;
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value,
-        }));
-
-        if (name === 'password') {
-            if (value.length >= 6) {
-                setIsPasswordValid(true);
-            } else {
-                setIsPasswordValid(false);
-            }
-        }
-    }
-
-    function createUserAndFetch(users, server, formData, hashedPassword) {
+    const createUserAndFetch = (users, name, email, hashedPassword) => {
         const newUserId = users.length + 1;
 
         const newUser = {
             id: newUserId,
-            name: formData.name,
-            email: formData.email,
+            name,
+            email,
             password: hashedPassword,
             role: 'user'
         };
 
-        return fetch(server, {
+        return fetch('http://localhost:8080/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,37 +30,24 @@ const RegisterForm = () => {
         });
     }
 
-    function clearFields() {
-        setFormData(prevData => ({
-            ...prevData,
-            email: '',
-            password: '',
-        }));
-        setIsPasswordValid(false);
-    }
-
-    function handleRegister() {
+    const handleRegister = () => {
         if (!isPasswordValid) {
             message.error('Пароль повинен містити щонайменше 6 символів');
-            setFormData(prevData => ({
-                ...prevData,
-                password: '',
-            }));
+            setPasswordValue('');
             return;
         }
 
-        bcrypt.hash(formData.password, 10)
+        bcrypt.hash(passwordValue, 10)
             .then(hashedPassword => {
-                fetch(server)
+                fetch('http://localhost:8080/api/users')
                     .then(response => response.json())
                     .then(users => {
-                        const existingUser = users.find(user => user.email === formData.email);
+                        const existingUser = users.find(user => user.email === emailValue);
 
                         if (existingUser) {
                             message.error("Користувач з такою поштою вже існує");
-                            clearFields()
                         } else {
-                            return createUserAndFetch(users, server, formData, hashedPassword);
+                            return createUserAndFetch(users, nameValue, emailValue, hashedPassword);
                         }
                     })
                     .then(createUserResponse => {
@@ -119,8 +86,8 @@ const RegisterForm = () => {
                         type="text"
                         name="name"
                         autoComplete="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
+                        value={nameValue}
+                        onChange={(e) => setNameValue(e.target.value)}
                     />
                 </Form.Item>
                 <Form.Item
@@ -132,11 +99,12 @@ const RegisterForm = () => {
                         type="email"
                         name="email"
                         autoComplete="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
+                        value={emailValue}
+                        onChange={(e) => setEmailValue(e.target.value)}
                     />
                 </Form.Item>
                 <Form.Item
+                    id="password"
                     label="Пароль"
                     name="password"
                     autoComplete="current-password"
@@ -146,21 +114,19 @@ const RegisterForm = () => {
                         type="password"
                         name="password"
                         autoComplete="current-password"
-                        value={formData.password}
-                        onChange={handleInputChange}
+                        value={passwordValue}
+                        onChange={(e) => {
+                            setPasswordValue(e.target.value);
+                            setIsPasswordValid(e.target.value.length >= 6);
+                        }}
                     />
                 </Form.Item>
                 <Form.Item>
-                    <button
-                        className="login-form__button"
-                        type="submit"
-                    >
+                    <button className="login-form__button" type="submit">
                         Зареєструватися
                     </button>
                 </Form.Item>
-                <Link className={"login-form__link"}
-                      to="/"
-                >
+                <Link className={"login-form__link"} to="/">
                     Вже є обліковий запис. <strong>Увійти</strong>
                 </Link>
             </Form>

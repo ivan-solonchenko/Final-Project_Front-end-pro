@@ -7,11 +7,13 @@ function Register() {
 
     useEffect(() => {
         const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-
-        if (loggedInUser && loggedInUser.role === 'admin') {
-            navigate('/admin');
-        } else {
-            navigate('/home');
+        if (loggedInUser) {
+            if (loggedInUser.role === 'admin') {
+                navigate('/admin');
+            } else {
+                navigate('/home');
+                console.log(loggedInUser.role);
+            }
         }
     }, [navigate]);
 
