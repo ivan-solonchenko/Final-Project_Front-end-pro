@@ -42,8 +42,10 @@ function Appointments() {
 			body: JSON.stringify(payload)
 		})
 			.then(response => response.json())
-			.then(data => console.log(data))
+			.then(response => message.success(`Ви записані до лікаря ${info[0].Age}`))
 			.catch((error) => console.log('Error:', error))
+
+
 	}
 
 	useEffect(() => {
@@ -88,7 +90,7 @@ function Appointments() {
 	}
 
 	function displayButton() {
-		return <div><button className="doctors-appoitments__button button-15" onClick={doAppointment}>Book Appoitment</button></div>
+		return <div><button className="doctors-appoitments__button button" onClick={doAppointment}>Book Appoitment</button></div>
 	}
 	
 	return (
