@@ -1,150 +1,128 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import React, { createRef, useEffect, useRef, useState } from "react";
-
+import { Calendar } from 'primereact/calendar'
+import { message } from 'antd';
 import './index.css';
-
-
-
+import "primereact/resources/themes/lara-light-indigo/theme.css"
+import "primereact/resources/primereact.min.css"
 
 function Appointments() {
-	let refDate = createRef();
-	let refIssue = createRef();
-	const [info, setInfo] = useState(null);
-
+	//params, variables , ref, state
 	let { id } = useParams();
-	console.log(id)
+	let navigate = useNavigate();
+	let user = JSON.parse(localStorage.getItem('loggedInUser'));
+	let userId = user.id;
+	let userEmail = user.email;
+	let refBookingTime = createRef();
+	const [info, setInfo] = useState(null);
+	const [date, setDate] = useState(null);
+	const [appointmentsInfo, setAppointmentsInfo] = useState(null);
+	const [bookingTime, setBookingTime] = useState(null);
 
-	 async function getUser() {
-		
-			const response = await fetch('https://jsonplaceholder.typicode.com/users')
-			const data =  await response.json();
-			setInfo(data.filter( user => user.id === +id))
-
-		
+	function fetchDoctor() {
+		fetch('http://localhost:8080/api/doctors')
+			.then(response => response.json())
+			.then(data => setInfo(data.filter(doctor => doctor.id === +id)))
+			.catch((error) => console.log('Error:', error))
 	}
 
+	function fetchAppointments() {
+		fetch('http://localhost:8080/api/appointments')
+			.then(response => response.json())
+			.then(data => setAppointmentsInfo(data.filter(appointment => appointment.email === userEmail && appointment.doctorId === id && appointment.bookingDay === date.getDay() && appointment.bookingMounth === date.getMonth())))
+			.catch((error) => message.error('щось пішло не так'))
+	}
+
+	function postAppointment(payload) {
+		fetch('http://localhost:8080/api/appointments', {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify(payload)
+		})
+			.then(response => response.json())
+			.then(response => message.success(`Ви записані до лікаря ${info[0].Age}`))
+			.catch((error) => console.log('Error:', error))
+
+
+	}
 
 	useEffect(() => {
-		getUser();
+		fetchDoctor();
 	}, [id]);
 
-	let user = {
-		id: 25,
-		name: 'Artem',
+	useEffect(() => {
+		if (date) {
+			fetchAppointments();
+		}
+	}, [date]);
+
+	function displayDates() {
+		if (date.getDay() > 0 && date.getDay() < 6) {
+			let time = ["10:00-11:00", "11:00-12:00", "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00"]
+			let fetchedData = [];
+			appointmentsInfo ? appointmentsInfo.map(appointment => fetchedData.push(appointment.bookingTimeRadio)) : console.log(false);
+			const commonArray = time.filter(item => !fetchedData.includes(item));
+			return commonArray.map((time, index) => <label for={time}><input type="radio" className="bookin-appointmens__time" id={time} key={index} ref={refBookingTime} name="bookingTime" value={time} onClick={(e) => setBookingTime(e.target.value)} /> {time}</label>)
+		} else {
+			return <p>Day is nt alailable</p>
+		}
+	}
+	console.log(appointmentsInfo);
+	console.log();
+	function doAppointment() {
+
+		let apObj = {
+			appointmentId: crypto.randomUUID(),
+			bookingTimeInfo: date,
+			bookingYear: date.getFullYear(),
+			bookingMounth: date.getMonth(),
+			bookingDay: date.getDay(),
+			userId: userId, /// should be parsed from json 
+			doctorId: id, /// from params
+			userEmail: user.email,
+			bookingTimeRadio: bookingTime,
+		}
+
+		postAppointment(apObj);
+		navigate('/doctors');
 	}
 
-	// let doctor = info.filter((doctor, index) => {
-	// 	return doctor.id === 1;
-	// })
-	user.appointment = [
-
-	]
-	function collectRefs() {
-		user.appointment.push({
-			doctorId: info[0].id,
-			doctorName: info[0].name,
-			// appointmentId: '2',
-			// appointmentDate: refDate.current.value,
-			// appointmentIssue: refIssue.current.value,
-		})
+	function displayButton() {
+		return <div><button className="doctors-appoitments__button button" onClick={doAppointment}>Book Appoitment</button></div>
 	}
-	console.log(info)
+	
 	return (
-		info &&	<div className="doctors-appoitments">
-			<h1 className="doctors-appoitments__title">Params = {id}</h1>
+		info && <div className="doctors-appoitments">
 			<a href="/doctors">return</a>
-			<div className="doctors-appoitments__item">
-				Name: {info[0].name }
+			<h1 className="doctors-appoitments__title text-title">Params = {id} {info[0].Name}</h1>
+			<div className="doctors-appoitments__wrap small-form">
+				<div className="doctors-appoitments__item">
+					<span className="doctors-appoitments__text">Age:</span> 	<span className="doctors-appoitments__info">{info[0].id}</span>
+				</div>
+				<div className="doctors-appoitments__item">
+					<span className="doctors-appoitments__text">Expirience:</span> <span className="doctors-appoitments__info">{info[0].Age} years</span>
+				</div>
+				<div className="doctors-appoitments__item">
+					<span className="doctors-appoitments__text">Days:</span> <span className="doctors-appoitments__info">Monday-Friday</span>
+				</div>
 			</div>
-			<div className="doctors-appoitments__item">
-				Email: {info[0].email}
+			<Calendar className="doctors-appoitments__calendar"
+				dateFormat="dd/mm/yy"
+				minDate={new Date()}
+				onChange={(e) => setDate(e.target.value)}
+				placeholder="choose date"
+			/>
+			<div className="doctors-appoitments__details">
+				{date && displayDates()}
 			</div>
-			<div className="doctors-appoitments__item">
-				Expirience: {info[0].address.city} years;
+			<div className="doctors-appoitments__details">
+				{bookingTime && displayButton()}
 			</div>
-			<input type="date" ref={refDate}/>
-
-			<div className="doctors-appoitments__item">
-				<textarea name="issue" id="1" ref={refIssue}>
-
-				</textarea>
-			</div>
-			<button onClick={collectRefs} className="doctors-appoitments__button" >Collect</button>
 		</div>
+
 	)
 }
 
 export default Appointments;
-// import { Form, Input } from 'antd';
-// import React, { useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { message } from 'antd';
-
-// function Login() {
-//     const navigate = useNavigate();
-//     const localPath = 'https://jsonplaceholder.typicode.com/users';
-
-//     const [formData, setFormData] = useState({
-//         email: '',
-//         password: '',
-//     });
-
-//     const onFinish = () => {
-//         fetch(localPath)
-//             .then(response => response.json())
-//             .then(users => {
-//                 const foundUser = users.find(user => user.email === formData.email && user.username === formData.password);
-
-//                 if (foundUser) {
-//                     message.success('Ви увійшли!');
-//                     localStorage.setItem('loggedInUser', JSON.stringify(formData));
-//                     navigate('/home');
-//                     clearFields()
-//                 } else {
-//                     message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
-//                     navigate('/register');
-//                 }
-//             })
-//             .catch(error => {
-//                 console.error('Error:', error);
-//             });
-//     };
-
-//     const handleInputChange = e => {
-//         const { name, value } = e.target;
-//         setFormData(prevData => ({
-//             ...prevData,
-//             [name]: value,
-//         }));
-//     };
-
-//     const clearFields = () => {
-//         formData.email = ''
-//         formData.password = ''
-//     };
-
-
-//     return (
-//         <div className="login-content">
-//             <Form layout="vertical" className="login-form">
-//                 <h2 className="login-form-title">Вхід
-//                     <hr />
-//                 </h2>
-//                 <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Будь ласка, введіть email' }]}>
-//                     <Input type="email"  name="email" value={formData.email} onChange={handleInputChange} />
-//                 </Form.Item>
-//                 <Form.Item label="Пароль" name="password" rules={[{ required: true, message: 'Будь ласка, введіть пароль' }]}>
-//                     <Input type="password" name="password" value={formData.password} onChange={handleInputChange} />
-//                 </Form.Item>
-//                 <button onClick={onFinish} className="login-button" type="submit">
-//                     Увійти
-//                 </button>
-//                 <Link to="/register">
-//                     Не маєте облікового запису? <strong>Зареєструватися</strong>
-//                 </Link>
-//             </Form>
-//         </div>
-//     );
-// }
-
-// export default Login;
