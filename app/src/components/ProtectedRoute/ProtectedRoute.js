@@ -14,7 +14,7 @@ function ProtectedRoute({ children }) {
     const user = JSON.parse(localStorage.getItem('loggedInUser'))
 
     return (
-        <div className='parent-page'>
+        user && <div className='parent-page'>
             <div className='parent-page__nav'>
                 <h1 className='parent-page__title'>
                     <span className='parent-page__blue'>Medi</span> <span className='parent-page__yellow'>Cover</span>
@@ -31,7 +31,7 @@ function ProtectedRoute({ children }) {
                 <div className='parent-page__item'>
                     {user.role === "admin" && (
                         <h3 onClick={() => {
-                            navigate('/doctors')
+                            navigate('/applyDoctor')
                         }}>
                             Admin page functions
                         </h3>
