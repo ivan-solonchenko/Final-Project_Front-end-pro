@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Appointments from './components/appointments/index';
 import Admin from "./components/Admin";
+import Doctors from './components/main/Doctors';
 
 function App() {
     return (
@@ -15,7 +16,8 @@ function App() {
                 <Route path="/" element={<Login />} />
                 <Route path="/register" element={<Register />}/>
                 <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-                <Route path='/appointments/:id' element={<Appointments/>} />
+                <Route path="/doctors" element={<ProtectedRoute><Doctors /></ProtectedRoute>} />
+                <Route path='/appointments/:id' element={<ProtectedRoute><Appointments /></ProtectedRoute>} />
                 <Route path='/admin' element={<ProtectedRoute><Admin /></ProtectedRoute>} />
               </Routes>
             </BrowserRouter>

@@ -10,7 +10,7 @@ const RegisterForm = () => {
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
 
-    const createUserAndFetch = (users, name, email, hashedPassword) => {
+    function createUserAndFetch(users, name, email, hashedPassword) {
         const newUserId = users.length + 1;
 
         const newUser = {
@@ -30,37 +30,35 @@ const RegisterForm = () => {
         });
     }
 
-    const handleRegister = () => {
+    function checkUserExistsAndRegister(hashedPassword) {
+        return fetch('http://localhost:8080/api/users')
+            .then(response => response.json())
+            .then(users => {
+                const existingUser = users.find(user => user.email === emailValue);
+
+                if (existingUser) {
+                    message.error("Користувач з такою поштою вже існує");
+                } else {
+                    return createUserAndFetch(users, nameValue, emailValue, hashedPassword);
+                }
+            });
+    }
+
+    function handleRegister() {
         if (!isPasswordValid) {
             message.error('Пароль повинен містити щонайменше 6 символів');
-            setPasswordValue('');
             return;
         }
 
         bcrypt.hash(passwordValue, 10)
-            .then(hashedPassword => {
-                fetch('http://localhost:8080/api/users')
-                    .then(response => response.json())
-                    .then(users => {
-                        const existingUser = users.find(user => user.email === emailValue);
-
-                        if (existingUser) {
-                            message.error("Користувач з такою поштою вже існує");
-                        } else {
-                            return createUserAndFetch(users, nameValue, emailValue, hashedPassword);
-                        }
-                    })
-                    .then(createUserResponse => {
-                        if (createUserResponse && createUserResponse.ok) {
-                            message.success('Вітаємо! Ви успішно зареєструвались.');
-                            navigate('/');
-                        } else {
-                            message.error("Не вдалося зареєструватись. Спробуйте ще раз");
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                    });
+            .then(checkUserExistsAndRegister)
+            .then(createUserResponse => {
+                if (createUserResponse && createUserResponse.ok) {
+                    message.success('Вітаємо! Ви успішно зареєструвались.');
+                    navigate('/');
+                } else {
+                    message.error("Не вдалося зареєструватись. Спробуйте ще раз");
+                }
             })
             .catch(error => {
                 console.error("Error:", error);
@@ -69,13 +67,12 @@ const RegisterForm = () => {
 
     return (
         <div className="login-content">
-            <Form className="login-form"
-                  layout="vertical"
-                  onFinish={handleRegister}
+            <Form
+                className="login-form"
+                layout="vertical"
+                onFinish={handleRegister}
             >
-                <h2 className="login-form__title">Реєстрація
-                    <hr />
-                </h2>
+                <h2 className="login-form__title">Реєстрація<hr /></h2>
 
                 <Form.Item
                     label="Ім'я"
@@ -104,7 +101,6 @@ const RegisterForm = () => {
                     />
                 </Form.Item>
                 <Form.Item
-                    id="password"
                     label="Пароль"
                     name="password"
                     autoComplete="current-password"

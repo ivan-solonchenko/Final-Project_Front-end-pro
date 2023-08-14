@@ -27,6 +27,23 @@ function LoginForm() {
         }
     }
 
+    function processUser(foundUser) {
+        if (foundUser) {
+            const isPasswordValid = bcrypt.compareSync(passwordValue, foundUser.password);
+
+            if (isPasswordValid) {
+                message.success('Ви увійшли!');
+                addUserToStore(foundUser);
+                navigateTheUser(foundUser);
+            } else {
+                message.error('Ви ввели невірний пароль!');
+            }
+        } else {
+            message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
+            navigate('/register');
+        }
+    }
+
     function handleLogin() {
         if (!isPasswordValid) {
             message.error('Пароль повинен містити щонайменше 6 символів');
@@ -37,22 +54,7 @@ function LoginForm() {
             .then((response) => response.json())
             .then((users) => {
                 const foundUser = users.find((user) => user.email === emailValue);
-
-                if (foundUser) {
-                    const isPasswordValid = bcrypt.compareSync(passwordValue, foundUser.password);
-
-                    if (isPasswordValid) {
-                        message.success('Ви увійшли!');
-                        addUserToStore(foundUser);
-                        navigateTheUser(foundUser);
-                    } else {
-                        message.error('Ви ввели невірний пароль!');
-                        setPasswordValue('');
-                    }
-                } else {
-                    message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
-                    navigate('/register');
-                }
+                processUser(foundUser);
             })
             .catch((error) => {
                 console.error('Error:', error);
