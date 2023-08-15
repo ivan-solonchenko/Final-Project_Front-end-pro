@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Typography, message } from "antd";
+import "./index.css";
 
 const { Text } = Typography;
 
@@ -30,13 +31,15 @@ const ApplyDoctorForm = () => {
       //   message.error('Oops, something went wrong. Please try again');
       // }
     } catch (error) {
-      message.error('Oops, something went wrong. Please try again');
+      message.error("Oops, something went wrong. Please try again");
     }
   };
 
   const handleEmailChange = (e) => {
     const email = e.target.value;
-    setEmailError(validateEmail(email) ? "" : "Please enter a valid email address.");
+    setEmailError(
+      validateEmail(email) ? "" : "Please enter a valid email address."
+    );
   };
 
   const validateEmail = (email) => {
@@ -45,13 +48,13 @@ const ApplyDoctorForm = () => {
   };
 
   return (
-    <Form form={form} onFinish={handleSubmit}>
+    <Form form={form} onFinish={handleSubmit} className="apply-doctor-form">
       <Form.Item
         label="Full Name"
         name="fullName"
         rules={[{ required: true, message: "Please enter your full name" }]}
       >
-        <Input />
+        <Input className="apply-doctor-input" />
       </Form.Item>
 
       <Form.Item
@@ -62,7 +65,7 @@ const ApplyDoctorForm = () => {
           { type: "number", message: "Please enter a valid number" },
         ]}
       >
-        <Input type="number" />
+        <Input className="apply-doctor-input" type="number" />
       </Form.Item>
 
       <Form.Item
@@ -70,7 +73,7 @@ const ApplyDoctorForm = () => {
         name="experience"
         rules={[{ required: true, message: "Please enter your experience" }]}
       >
-        <Input />
+        <Input className="apply-doctor-input" />
       </Form.Item>
 
       <Form.Item
@@ -78,15 +81,17 @@ const ApplyDoctorForm = () => {
         name="education"
         rules={[{ required: true, message: "Please enter your education" }]}
       >
-        <Input />
+        <Input className="apply-doctor-input" />
       </Form.Item>
 
       <Form.Item
         label="Previous Work Place"
         name="previousWorkplace"
-        rules={[{ required: true, message: "Please enter your previous workplace" }]}
+        rules={[
+          { required: true, message: "Please enter your previous workplace" },
+        ]}
       >
-        <Input />
+        <Input className="apply-doctor-input" />
       </Form.Item>
 
       <Form.Item
@@ -99,11 +104,15 @@ const ApplyDoctorForm = () => {
         validateStatus={emailError ? "error" : ""}
         help={emailError}
       >
-        <Input onChange={handleEmailChange} />
+        <Input className="apply-doctor-input" onChange={handleEmailChange} />
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="apply-doctor-button"
+        >
           Submit
         </Button>
       </Form.Item>
