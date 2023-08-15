@@ -5,9 +5,10 @@ import bcrypt from 'bcryptjs';
 
 function LoginForm() {
     const navigate = useNavigate();
-    const [isPasswordValid, setIsPasswordValid] = useState(false);
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
+    const [isPasswordValid, setIsPasswordValid] = useState(false);
+    const [form] = Form.useForm();
 
     function addUserToStore(user) {
         const userToStore = {
@@ -37,6 +38,7 @@ function LoginForm() {
                 navigateTheUser(foundUser);
             } else {
                 message.error('Ви ввели невірний пароль!');
+                form.resetFields(['password']);
             }
         } else {
             message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
@@ -44,11 +46,15 @@ function LoginForm() {
         }
     }
 
-    function handleLogin() {
+    function checkPasswordValid() {
         if (!isPasswordValid) {
             message.error('Пароль повинен містити щонайменше 6 символів');
             return;
         }
+    }
+
+    function handleLogin() {
+        checkPasswordValid();
 
         fetch('http://localhost:8080/api/users')
             .then((response) => response.json())
@@ -64,6 +70,7 @@ function LoginForm() {
     return (
         <div className="login-content">
             <Form
+                form={form}
                 className="login-form"
                 layout="vertical"
                 onFinish={handleLogin}
@@ -88,6 +95,7 @@ function LoginForm() {
                     className={'no-star'}
                     label="Пароль"
                     name="password"
+
                     rules={[{ required: true, message: 'Будь ласка, введіть пароль' }]}
                 >
                     <Input.Password
@@ -98,7 +106,6 @@ function LoginForm() {
                             setPasswordValue(e.target.value);
                             setIsPasswordValid(e.target.value.length >= 6);
                         }}
-                        autoComplete="current-password"
                     />
                 </Form.Item>
                 <Form.Item>

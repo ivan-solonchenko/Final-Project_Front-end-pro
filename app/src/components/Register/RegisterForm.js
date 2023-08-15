@@ -5,10 +5,10 @@ import bcrypt from 'bcryptjs';
 
 const RegisterForm = () => {
     const navigate = useNavigate();
-    const [isPasswordValid, setIsPasswordValid] = useState(false);
     const [nameValue, setNameValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
+    const [isPasswordValid, setIsPasswordValid] = useState(false);
 
     function createUserAndFetch(users, name, email, hashedPassword) {
         const newUserId = users.length + 1;

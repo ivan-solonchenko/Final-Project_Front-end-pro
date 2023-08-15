@@ -4,24 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8882fd3-cb2f-408b-afaf-e6da04cf088b" name="Changes" comment="finished the logic for login and registration">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/appointments.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/App.js" afterDir="false" />
+    <list default="true" id="a8882fd3-cb2f-408b-afaf-e6da04cf088b" name="Changes" comment="modified code after merge">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/Login/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Login/LoginForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/Login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Login/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/ProtectedRoute/ProtectedRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/ProtectedRoute/ProtectedRoute.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/Register/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Register/RegisterForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/appointments/apiCalls.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/appointments/doctors.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/appointments/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/appointments/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/appointments/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/appointments/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/main/Doctors.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/main/Doctors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +98,7 @@
       <workItem from="1691758582970" duration="5054000" />
       <workItem from="1691768387310" duration="2719000" />
       <workItem from="1691831656121" duration="781000" />
+      <workItem from="1692077790358" duration="9316000" />
     </task>
     <task id="LOCAL-00004" summary="prepared for pushing">
       <created>1691649666106</created>
@@ -148,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691749622166</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="modified code after merge">
+      <created>1692043926004</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1692043926004</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,6 +193,7 @@
     <MESSAGE value="added hashed password" />
     <MESSAGE value="added password validation" />
     <MESSAGE value="finished the logic for login and registration" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished the logic for login and registration" />
+    <MESSAGE value="modified code after merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified code after merge" />
   </component>
 </project>
