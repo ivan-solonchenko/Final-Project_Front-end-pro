@@ -44,8 +44,6 @@ function Appointments() {
 			.then(response => response.json())
 			.then(response => message.success(`Ви записані до лікаря ${info[0].Age}`))
 			.catch((error) => console.log('Error:', error))
-
-
 	}
 
 	useEffect(() => {
@@ -64,13 +62,12 @@ function Appointments() {
 			let fetchedData = [];
 			appointmentsInfo ? appointmentsInfo.map(appointment => fetchedData.push(appointment.bookingTimeRadio)) : console.log(false);
 			const commonArray = time.filter(item => !fetchedData.includes(item));
-			return commonArray.map((time, index) => <label for={time}><input type="radio" className="bookin-appointmens__time" id={time} key={index} ref={refBookingTime} name="bookingTime" value={time} onClick={(e) => setBookingTime(e.target.value)} /> {time}</label>)
+			return commonArray.map((time, index) => <label key={index} htmlFor={time}><input type="radio" className="bookin-appointmens__time" id={time} key={index} ref={refBookingTime} name="bookingTime" value={time} onClick={(e) => setBookingTime(e.target.value)} /> {time}</label>)
 		} else {
 			return <p>Day is nt alailable</p>
 		}
 	}
-	console.log(appointmentsInfo);
-	console.log();
+	
 	function doAppointment() {
 
 		let apObj = {
