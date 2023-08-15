@@ -1,61 +1,42 @@
 import React, { useState } from "react";
+import { Form, Input, Button, Typography, message } from "antd";
+
+const { Text } = Typography;
 
 const ApplyDoctorForm = () => {
-  const [fullName, setFullName] = useState("");
-  const [age, setAge] = useState("");
-  const [experience, setExperience] = useState("");
-  const [education, setEducation] = useState("");
-  const [previousWorkplace, setPreviousWorkplace] = useState("");
-  const [email, setEmail] = useState("");
+  const [form] = Form.useForm();
   const [emailError, setEmailError] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (!validateEmail(email)) {
+  const handleSubmit = async (values) => {
+    if (!validateEmail(values.email)) {
       setEmailError("Please enter a valid email address.");
       return;
     }
 
-    // Тут я добавлю код для отправки на сервер
-    //  const createDocResponse = await fetch (server,
-    //  init:
-    //   method: 'POST',
-    //   headers: {
-    //  *Content- Type': 'application/json'
-    //  }
-    // body: JSON. stringify (newDoc),
-    // H;
-    // if (createDocResponse.ok) {
-    // message. success ( content: 'Bravo.You successfully apllied as a doctor');
-    // navigate('/');
-    // } else {
-    //  message. error ( content: "Oops , something went wrong , please try again");
-
-    setFullName("");
-    setAge("");
-    setExperience("");
-    setEducation("");
-    setPreviousWorkplace("");
-    setEmail("");
-    setEmailError("");
-  };
-
-  const handleFullNameChange = (e) => {
-    if (!/\d/.test(e.target.value)) {
-      setFullName(e.target.value);
-    }
-  };
-
-  const handleAgeChange = (e) => {
-    if (!isNaN(e.target.value)) {
-      setAge(e.target.value);
+    try {
+      // Add your server API call logic here
+      // Example:
+      // const response = await fetch(server, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(values),
+      // });
+      // if (response.ok) {
+      //   message.success('Bravo. You successfully applied as a doctor');
+      //   form.resetFields();
+      // } else {
+      //   message.error('Oops, something went wrong. Please try again');
+      // }
+    } catch (error) {
+      message.error('Oops, something went wrong. Please try again');
     }
   };
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    setEmailError("");
+    const email = e.target.value;
+    setEmailError(validateEmail(email) ? "" : "Please enter a valid email address.");
   };
 
   const validateEmail = (email) => {
@@ -64,76 +45,69 @@ const ApplyDoctorForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="fullName">Full Name:</label>
-        <input
-          type="text"
-          id="fullName"
-          value={fullName}
-          onChange={handleFullNameChange}
-          required
-        />
-      </div>
+    <Form form={form} onFinish={handleSubmit}>
+      <Form.Item
+        label="Full Name"
+        name="fullName"
+        rules={[{ required: true, message: "Please enter your full name" }]}
+      >
+        <Input />
+      </Form.Item>
 
-      <div>
-        <label htmlFor="age">Age:</label>
-        <input
-          type="number"
-          id="age"
-          value={age}
-          onChange={handleAgeChange}
-          required
-        />
-      </div>
+      <Form.Item
+        label="Age"
+        name="age"
+        rules={[
+          { required: true, message: "Please enter your age" },
+          { type: "number", message: "Please enter a valid number" },
+        ]}
+      >
+        <Input type="number" />
+      </Form.Item>
 
-      <div>
-        <label htmlFor="experience">Experience:</label>
-        <input
-          type="text"
-          id="experience"
-          value={experience}
-          onChange={(e) => setExperience(e.target.value)}
-          required
-        />
-      </div>
+      <Form.Item
+        label="Experience"
+        name="experience"
+        rules={[{ required: true, message: "Please enter your experience" }]}
+      >
+        <Input />
+      </Form.Item>
 
-      <div>
-        <label htmlFor="education">Education:</label>
-        <input
-          type="text"
-          id="education"
-          value={education}
-          onChange={(e) => setEducation(e.target.value)}
-          required
-        />
-      </div>
+      <Form.Item
+        label="Education"
+        name="education"
+        rules={[{ required: true, message: "Please enter your education" }]}
+      >
+        <Input />
+      </Form.Item>
 
-      <div>
-        <label htmlFor="previousWorkplace">Previous Work Place:</label>
-        <input
-          type="text"
-          id="previousWorkplace"
-          value={previousWorkplace}
-          onChange={(e) => setPreviousWorkplace(e.target.value)}
-          required
-        />
-      </div>
+      <Form.Item
+        label="Previous Work Place"
+        name="previousWorkplace"
+        rules={[{ required: true, message: "Please enter your previous workplace" }]}
+      >
+        <Input />
+      </Form.Item>
 
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
-          required
-        />
-        {emailError && <p style={{ color: "red" }}>{emailError}</p>}
-      </div>
+      <Form.Item
+        label="Email"
+        name="email"
+        rules={[
+          { required: true, message: "Please enter your email" },
+          { type: "email", message: "Please enter a valid email address" },
+        ]}
+        validateStatus={emailError ? "error" : ""}
+        help={emailError}
+      >
+        <Input onChange={handleEmailChange} />
+      </Form.Item>
 
-      <button type="submit">Submit</button>
-    </form>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 
