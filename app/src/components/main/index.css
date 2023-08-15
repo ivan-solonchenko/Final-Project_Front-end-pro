@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .doctorWrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    gap: 5px;
+  }
+  
+  .doctor {
+    border: 1px solid #116A7B;
+    padding: 5px;
+    width: 33%;
+  }
