@@ -16,7 +16,9 @@ function ProtectedRoute({ children }) {
     return (
         user && <div className='parent-page'>
             <div className='parent-page__nav'>
-                <h1 className='parent-page__title'>
+                <h1 className='parent-page__title' onClick={() => {
+                            navigate('/doctors')
+                        }}>
                     <span className='parent-page__blue'>Medi</span> <span className='parent-page__yellow'>Cover</span>
                 </h1>
                 <div className='parent-page__item'>
@@ -24,7 +26,7 @@ function ProtectedRoute({ children }) {
                         <h3 onClick={() => {
                             navigate('/doctors')
                         }}>
-                            Doctors
+                            My appointments
                         </h3>
                     )}
                 </div>
