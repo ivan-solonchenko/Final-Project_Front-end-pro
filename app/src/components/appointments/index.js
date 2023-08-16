@@ -9,11 +9,12 @@ import "primereact/resources/primereact.min.css"
 function Appointments() {
 	//params, variables , ref, state
 	let { id } = useParams();
-	console.log(typeof id)
 	let navigate = useNavigate();
 	let user = JSON.parse(localStorage.getItem('loggedInUser'));
 	let userId = user.id;
 	let userEmail = user.email;
+	let monthArr = ["January","February","March","April","May","June","July", "August","September","October","November","December"];
+	let dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	let refBookingTime = createRef();
 	const [info, setInfo] = useState(null);
 	const [date, setDate] = useState(null);
@@ -30,7 +31,7 @@ function Appointments() {
 	function fetchAppointments() {
 		fetch('http://localhost:8080/api/appointments')
 			.then(response => response.json())
-			.then(data => setAppointmentsInfo(data.filter(appointment => appointment.userEmail === userEmail && appointment.doctorId === id && appointment.bookingDay === date.getDay() && appointment.bookingMounth === date.getMonth())))
+			.then(data => setAppointmentsInfo(data.filter(appointment => appointment.userEmail === userEmail && appointment.doctorId === id && appointment.bookingDay === dayNames[date.getDay()] && appointment.bookingMounth === monthArr[date.getMonth()])))
 			.catch((error) => message.error('щось пішло не так'))
 	}
 
@@ -64,7 +65,7 @@ function Appointments() {
 			console.log(appointmentsInfo);
 			appointmentsInfo ? appointmentsInfo.map(appointment => fetchedData.push(appointment.bookingTimeRadio)) : console.log(false);
 			const commonArray = time.filter(item => !fetchedData.includes(item));
-			return commonArray.map((time, index) => <label key={index} htmlFor={time}><input type="radio" className="bookin-appointmens__time" id={time} key={index} ref={refBookingTime} name="bookingTime" value={time} onClick={(e) => setBookingTime(e.target.value)} /> {time}</label>)
+			return commonArray.length === 0 ? 'No time available on this date' :  commonArray.map((time, index) => <label key={index} htmlFor={time}><input type="radio" className="bookin-appointmens__time" id={time} key={index} ref={refBookingTime} name="bookingTime" value={time} onClick={(e) => setBookingTime(e.target.value)} /> {time}</label>)
 		} else {
 			return <p>Day is nt alailable</p>
 		}
@@ -76,11 +77,14 @@ function Appointments() {
 			appointmentId: crypto.randomUUID(),
 			bookingTimeInfo: date,
 			bookingYear: date.getFullYear(),
-			bookingMounth: date.getMonth(),
-			bookingDay: date.getDay(),
-			userId: userId, /// should be parsed from json 
+			bookingMounth: monthArr[date.getMonth()],
+			bookingDay: dayNames[date.getDay()],
 			doctorId: id, /// from params
+			doctorfullName: info[0].fullName,
+			doctorEmail: info[0].email,
+			doctorSpeciality: info[0].speciality,
 			userEmail: user.email,
+			userId: userId, /// should be parsed from json 
 			bookingTimeRadio: bookingTime,
 		}
 
@@ -94,14 +98,22 @@ function Appointments() {
 	
 	return (
 		info && <div className="doctors-appoitments">
-			<a href="/doctors">return</a>
-			<h1 className="doctors-appoitments__title text-title">Params = {id} {info[0].Name}</h1>
+			<h1 className="doctors-appoitments__title text-title">{info[0].fullName}</h1>
 			<div className="doctors-appoitments__wrap small-form">
 				<div className="doctors-appoitments__item">
-					<span className="doctors-appoitments__text">Age:</span> 	<span className="doctors-appoitments__info">{info[0].id}</span>
+					<span className="doctors-appoitments__text">Speciality:</span> 	<span className="doctors-appoitments__info">{info[0].speciality}</span>
 				</div>
 				<div className="doctors-appoitments__item">
-					<span className="doctors-appoitments__text">Expirience:</span> <span className="doctors-appoitments__info">{info[0].Age} years</span>
+					<span className="doctors-appoitments__text">Age:</span> 	<span className="doctors-appoitments__info">{info[0].age} years</span>
+				</div>
+				<div className="doctors-appoitments__item">
+					<span className="doctors-appoitments__text">Experience:</span> <span className="doctors-appoitments__info">{info[0].experience} years</span>
+				</div>
+				<div className="doctors-appoitments__item">
+					<span className="doctors-appoitments__text">Email:</span> <span className="doctors-appoitments__info">{info[0].email} </span>
+				</div>
+				<div className="doctors-appoitments__item">
+					<span className="doctors-appoitments__text">Education:</span> <span className="doctors-appoitments__info">{info[0].education} </span>
 				</div>
 				<div className="doctors-appoitments__item">
 					<span className="doctors-appoitments__text">Days:</span> <span className="doctors-appoitments__info">Monday-Friday</span>
@@ -113,7 +125,7 @@ function Appointments() {
 				onChange={(e) => setDate(e.target.value)}
 				placeholder="choose date"
 			/>
-			<div className="doctors-appoitments__details">
+			<div className="doctors-appoitments__details_radio">
 				{date && displayDates()}
 			</div>
 			<div className="doctors-appoitments__details">
