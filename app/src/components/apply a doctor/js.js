@@ -1,51 +1,59 @@
-import React, { useState } from "react";
-import { Form, Input, Button, Typography, message } from "antd";
+import React, { useState, useEffect } from "react";
+import { Form, Input, Button, message } from "antd";
 import "./index.css";
 
-const { Text } = Typography;
+ //const { Text } = Typography;
 
 const ApplyDoctorForm = () => {
   const [form] = Form.useForm();
   const [emailError, setEmailError] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
+  const [education, setEducation] = useState("");
+  const [experience, setExperience] = useState("");
+  const [speciality, setSpeciality] = useState("");
+  const [doctors, setDoctors] = useState([]);
 
-  const handleSubmit = async (values) => {
-    if (!validateEmail(values.email)) {
-      setEmailError("Please enter a valid email address.");
+  useEffect(() => {
+    fetch("http://localhost:8080/api/doctors")
+      .then((response) => response.json())
+      .then((fetchedDoctors) => setDoctors(fetchedDoctors))
+      .catch((error) => console.error("Error:", error));
+  }, []);
+
+  function handleSubmit() {
+    const existingDoctor = doctors.find((doctor) => doctor.email === email);
+
+    if (existingDoctor) {
+      message.error("This email is already in use ");
       return;
-    }
+    } else {
+      return createDoctorAndFetch(fullName, email);
+    } 
+  }
 
-    try {
-      // Add your server API call logic here
-      // Example:
-      // const response = await fetch(server, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(values),
-      // });
-      // if (response.ok) {
-      //   message.success('Bravo. You successfully applied as a doctor');
-      //   form.resetFields();
-      // } else {
-      //   message.error('Oops, something went wrong. Please try again');
-      // }
-    } catch (error) {
-      message.error("Oops, something went wrong. Please try again");
-    }
-  };
+  function createDoctorAndFetch(name, email) {
+    const newDoctorId = doctors.length + 1;
 
-  const handleEmailChange = (e) => {
-    const email = e.target.value;
-    setEmailError(
-      validateEmail(email) ? "" : "Please enter a valid email address."
-    );
-  };
+    const newDoctor = {
+      id: newDoctorId, 
+      fullName: fullName ,
+    age: age ,
+    email: email,
+    experience: experience,
+    education: education ,
+    speciality: speciality ,  
+    };
 
-  const validateEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  };
+    return fetch("http://localhost:8080/api/doctors", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newDoctor),
+    });
+  }
 
   return (
     <Form form={form} onFinish={handleSubmit} className="apply-doctor-form">
@@ -54,7 +62,10 @@ const ApplyDoctorForm = () => {
         name="fullName"
         rules={[{ required: true, message: "Please enter your full name" }]}
       >
-        <Input className="apply-doctor-input" />
+        <Input
+          onChange={(e) => setFullName(e.target.value)}
+          className="apply-doctor-input"
+        />
       </Form.Item>
 
       <Form.Item
@@ -65,7 +76,11 @@ const ApplyDoctorForm = () => {
           { type: "number", message: "Please enter a valid number" },
         ]}
       >
-        <Input className="apply-doctor-input" type="number" />
+        <Input
+          onChange={(e) => setAge(e.target.value)}
+          className="apply-doctor-input"
+          type="number"
+        />
       </Form.Item>
 
       <Form.Item
@@ -73,7 +88,10 @@ const ApplyDoctorForm = () => {
         name="experience"
         rules={[{ required: true, message: "Please enter your experience" }]}
       >
-        <Input className="apply-doctor-input" />
+        <Input
+          onChange={(e) => setExperience(e.target.value)}
+          className="apply-doctor-input"
+        />
       </Form.Item>
 
       <Form.Item
@@ -81,17 +99,23 @@ const ApplyDoctorForm = () => {
         name="education"
         rules={[{ required: true, message: "Please enter your education" }]}
       >
-        <Input className="apply-doctor-input" />
+        <Input
+          onChange={(e) => setEducation(e.target.value)}
+          className="apply-doctor-input"
+        />
       </Form.Item>
 
       <Form.Item
-        label="Previous Work Place"
-        name="previousWorkplace"
+        label="Speciality"
+        name="swpeciality"
         rules={[
           { required: true, message: "Please enter your previous workplace" },
         ]}
       >
-        <Input className="apply-doctor-input" />
+        <Input
+          onChange={(e) => setSpeciality(e.target.value)}
+          className="apply-doctor-input"
+        />
       </Form.Item>
 
       <Form.Item
@@ -104,7 +128,10 @@ const ApplyDoctorForm = () => {
         validateStatus={emailError ? "error" : ""}
         help={emailError}
       >
-        <Input className="apply-doctor-input" onChange={handleEmailChange} />
+        <Input
+          className="apply-doctor-input"
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </Form.Item>
 
       <Form.Item>
