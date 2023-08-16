@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "fullName": "Trevor Zanetti",
+    "age": 37,
+    "email": "trevorZanetti@gmail.com",
+    "experience": 8,
+    "education": "Medical University of the Americas",
+    "speciality": "Dermetologist"
+  },
+  {
+    "id": 2,
+    "fullName": "Carter Rougeaux",
+    "age": 29,
+    "email": "carterRougeaux@gmail.com",
+    "experience": 2,
+    "education": "Medical University of South Carolina",
+    "speciality": "Cardiologist"
+  },
+  {
+    "id": 3,
+    "fullName": "Kylie Marrone",
+    "age": 33,
+    "email": "kylieMarrone@gmail.com",
+    "experience": 5,
+    "education": "Stanford University School of Medicine",
+    "speciality": "Surgeon"
+  }
+]

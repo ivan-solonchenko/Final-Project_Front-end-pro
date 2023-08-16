@@ -1,0 +1,50 @@
+* { 
+	/* double split complementary */
+
+}
+
+.doctors-appoitments{
+	background-color: #fff;
+	padding: 10px 20px;
+	border-radius: 10px;
+}
+.doctors-appoitments__title {
+	
+	border-bottom: 2px solid grey;
+	/* top | right | bottom | left */
+	text-transform: uppercase;
+}
+
+.doctors-appoitments__wrap {
+	width: 25%;
+	border-radius: 10px;
+	text-transform: uppercase;
+}
+
+.doctors-appoitments__item {
+	display: flex;
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 10px;
+	resize: vertical;
+	width: 100%;
+	/* top | right | bottom | left */
+	padding: 5px 20px 5px 2px;
+	color: #583E2E ;
+}
+
+.doctors-appoitments__info {
+	margin-left: auto;
+}
+
+/* CSS for button */
+.button {
+    height: 45px;
+    width: 20%;
+    margin: 10px 0;
+    padding: 0 20px;
+    border-radius: 0;
+    color: white;
+    background-color: black;
+    text-transform: uppercase;
+}
