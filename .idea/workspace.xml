@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8882fd3-cb2f-408b-afaf-e6da04cf088b" name="Changes" comment="modified code after merge">
+    <list default="true" id="a8882fd3-cb2f-408b-afaf-e6da04cf088b" name="Changes" comment="finished login and register">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/Login/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Login/LoginForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/Register/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Register/RegisterForm.js" afterDir="false" />
     </list>
@@ -98,7 +99,7 @@
       <workItem from="1691758582970" duration="5054000" />
       <workItem from="1691768387310" duration="2719000" />
       <workItem from="1691831656121" duration="781000" />
-      <workItem from="1692077790358" duration="9316000" />
+      <workItem from="1692077790358" duration="24621000" />
     </task>
     <task id="LOCAL-00004" summary="prepared for pushing">
       <created>1691649666106</created>
@@ -142,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692043926004</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="finished login and register">
+      <created>1692112937483</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1692112937483</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +202,7 @@
     <MESSAGE value="added password validation" />
     <MESSAGE value="finished the logic for login and registration" />
     <MESSAGE value="modified code after merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="modified code after merge" />
+    <MESSAGE value="finished login and register" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished login and register" />
   </component>
 </project>

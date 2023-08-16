@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
 
 function LoginForm() {
     const navigate = useNavigate();
+    const [users, setUsers] = useState([]);
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
     const [isPasswordValid, setIsPasswordValid] = useState(false);
     const [form] = Form.useForm();
+
+
+    useEffect(() => {
+        fetch('http://localhost:8080/api/users')
+            .then(response => response.json())
+            .then(fetchedUsers => setUsers(fetchedUsers))
+            .catch(error => console.error('Помилка:', error));
+    }, []);
 
     function addUserToStore(user) {
         const userToStore = {
@@ -28,7 +37,9 @@ function LoginForm() {
         }
     }
 
-    function processUser(foundUser) {
+    function processUser() {
+        const foundUser = users.find(user => user.email === emailValue);
+
         if (foundUser) {
             const isPasswordValid = bcrypt.compareSync(passwordValue, foundUser.password);
 
@@ -41,30 +52,18 @@ function LoginForm() {
                 form.resetFields(['password']);
             }
         } else {
-            message.error('Користувача з таким email та паролем не знайдено. Зареєструйтесь!');
+            message.error('Користувача з таким email та паролем не знайдено. Зареєструйтеся!');
             navigate('/register');
         }
     }
 
-    function checkPasswordValid() {
+    function handleLogin() {
         if (!isPasswordValid) {
             message.error('Пароль повинен містити щонайменше 6 символів');
             return;
         }
-    }
 
-    function handleLogin() {
-        checkPasswordValid();
-
-        fetch('http://localhost:8080/api/users')
-            .then((response) => response.json())
-            .then((users) => {
-                const foundUser = users.find((user) => user.email === emailValue);
-                processUser(foundUser);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        processUser();
     }
 
     return (
@@ -75,7 +74,7 @@ function LoginForm() {
                 layout="vertical"
                 onFinish={handleLogin}
             >
-                <h2 className="login-form__title">Вхід<hr /></h2>
+                <h2 className="login-form__title">MediCover Login<hr /></h2>
 
                 <Form.Item
                     className={'no-star'}
@@ -87,22 +86,21 @@ function LoginForm() {
                         type="email"
                         name="email"
                         value={emailValue}
-                        onChange={(e) => setEmailValue(e.target.value)}
+                        onChange={e => setEmailValue(e.target.value)}
                         autoComplete="email"
                     />
                 </Form.Item>
                 <Form.Item
                     className={'no-star'}
-                    label="Пароль"
+                    label="Password"
                     name="password"
-
                     rules={[{ required: true, message: 'Будь ласка, введіть пароль' }]}
                 >
                     <Input.Password
                         type="password"
                         name="password"
                         value={passwordValue}
-                        onChange={(e) => {
+                        onChange={e => {
                             setPasswordValue(e.target.value);
                             setIsPasswordValid(e.target.value.length >= 6);
                         }}
@@ -110,11 +108,11 @@ function LoginForm() {
                 </Form.Item>
                 <Form.Item>
                     <button className="login-form__button" type="submit">
-                        Увійти
+                        Sign in
                     </button>
                 </Form.Item>
                 <Link className={'login-form__link'} to="/register">
-                    Не маєте облікового запису? <strong>Зареєструватися</strong>
+                    Don't have an account? <strong>Sign up</strong>
                 </Link>
             </Form>
         </div>

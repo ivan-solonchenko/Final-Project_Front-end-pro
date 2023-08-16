@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
 
 const RegisterForm = () => {
     const navigate = useNavigate();
+    const [users, setUsers] = useState([]);
     const [nameValue, setNameValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
     const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-    function createUserAndFetch(users, name, email, hashedPassword) {
+    useEffect(() => {
+        fetch('http://localhost:8080/api/users')
+            .then(response => response.json())
+            .then(fetchedUsers => setUsers(fetchedUsers))
+            .catch(error => console.error('Помилка:', error));
+    }, []);
+
+    function createUserAndFetch(name, email, hashedPassword) {
         const newUserId = users.length + 1;
 
         const newUser = {
@@ -31,17 +39,13 @@ const RegisterForm = () => {
     }
 
     function checkUserExistsAndRegister(hashedPassword) {
-        return fetch('http://localhost:8080/api/users')
-            .then(response => response.json())
-            .then(users => {
-                const existingUser = users.find(user => user.email === emailValue);
+        const existingUser = users.find(user => user.email === emailValue);
 
-                if (existingUser) {
-                    message.error("Користувач з такою поштою вже існує");
-                } else {
-                    return createUserAndFetch(users, nameValue, emailValue, hashedPassword);
-                }
-            });
+        if (existingUser) {
+            message.error("Користувач з такою поштою вже існує");
+        } else {
+            return createUserAndFetch(nameValue, emailValue, hashedPassword);
+        }
     }
 
     function handleRegister() {
@@ -51,7 +55,7 @@ const RegisterForm = () => {
         }
 
         bcrypt.hash(passwordValue, 10)
-            .then(checkUserExistsAndRegister)
+            .then(hashedPassword => checkUserExistsAndRegister(hashedPassword))
             .then(createUserResponse => {
                 if (createUserResponse && createUserResponse.ok) {
                     message.success('Вітаємо! Ви успішно зареєструвались.');
@@ -72,10 +76,10 @@ const RegisterForm = () => {
                 layout="vertical"
                 onFinish={handleRegister}
             >
-                <h2 className="login-form__title">Реєстрація<hr /></h2>
+                <h2 className="login-form__title">MediCover Register<hr /></h2>
 
                 <Form.Item
-                    label="Ім'я"
+                    label="Name"
                     name="name"
                     rules={[{ required: true, message: "Будь ласка, введіть ваше ім'я" }]}
                 >
@@ -101,7 +105,7 @@ const RegisterForm = () => {
                     />
                 </Form.Item>
                 <Form.Item
-                    label="Пароль"
+                    label="Password"
                     name="password"
                     autoComplete="current-password"
                     rules={[{ required: true, message: "Будь ласка, введіть пароль" }]}
@@ -119,11 +123,11 @@ const RegisterForm = () => {
                 </Form.Item>
                 <Form.Item>
                     <button className="login-form__button" type="submit">
-                        Зареєструватися
+                        Sign up
                     </button>
                 </Form.Item>
                 <Link className={"login-form__link"} to="/">
-                    Вже є обліковий запис. <strong>Увійти</strong>
+                    Already have an account. <strong>Sign in</strong>
                 </Link>
             </Form>
         </div>
