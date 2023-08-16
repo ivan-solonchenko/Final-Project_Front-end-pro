@@ -15,7 +15,7 @@ const RegisterForm = () => {
         fetch('http://localhost:8080/api/users')
             .then(response => response.json())
             .then(fetchedUsers => setUsers(fetchedUsers))
-            .catch(error => console.error('Помилка:', error));
+            .catch(error => console.error('Error:', error));
     }, []);
 
     function createUserAndFetch(name, email, hashedPassword) {
@@ -42,7 +42,7 @@ const RegisterForm = () => {
         const existingUser = users.find(user => user.email === emailValue);
 
         if (existingUser) {
-            message.error("Користувач з такою поштою вже існує");
+            message.error("A user with this email already exists");
         } else {
             return createUserAndFetch(nameValue, emailValue, hashedPassword);
         }
@@ -50,7 +50,7 @@ const RegisterForm = () => {
 
     function handleRegister() {
         if (!isPasswordValid) {
-            message.error('Пароль повинен містити щонайменше 6 символів');
+            message.error("The password must contain at least 6 characters");
             return;
         }
 
@@ -58,10 +58,10 @@ const RegisterForm = () => {
             .then(hashedPassword => checkUserExistsAndRegister(hashedPassword))
             .then(createUserResponse => {
                 if (createUserResponse && createUserResponse.ok) {
-                    message.success('Вітаємо! Ви успішно зареєструвались.');
+                    message.success("Congratulations! You have successfully registered.");
                     navigate('/');
                 } else {
-                    message.error("Не вдалося зареєструватись. Спробуйте ще раз");
+                    message.error("Failed to register. Try again");
                 }
             })
             .catch(error => {
@@ -81,7 +81,7 @@ const RegisterForm = () => {
                 <Form.Item
                     label="Name"
                     name="name"
-                    rules={[{ required: true, message: "Будь ласка, введіть ваше ім'я" }]}
+                    rules={[{ required: true, message: "Please enter your name" }]}
                 >
                     <Input
                         type="text"
@@ -94,7 +94,7 @@ const RegisterForm = () => {
                 <Form.Item
                     label="Email"
                     name="email"
-                    rules={[{ required: true, message: "Будь ласка, введіть email" }]}
+                    rules={[{ required: true, message: "Please enter your email" }]}
                 >
                     <Input
                         type="email"
@@ -108,7 +108,7 @@ const RegisterForm = () => {
                     label="Password"
                     name="password"
                     autoComplete="current-password"
-                    rules={[{ required: true, message: "Будь ласка, введіть пароль" }]}
+                    rules={[{ required: true, message: "Please enter a password" }]}
                 >
                     <Input.Password
                         type="password"

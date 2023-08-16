@@ -16,7 +16,7 @@ function LoginForm() {
         fetch('http://localhost:8080/api/users')
             .then(response => response.json())
             .then(fetchedUsers => setUsers(fetchedUsers))
-            .catch(error => console.error('Помилка:', error));
+            .catch(error => console.error("Error", error));
     }, []);
 
     function addUserToStore(user) {
@@ -44,22 +44,22 @@ function LoginForm() {
             const isPasswordValid = bcrypt.compareSync(passwordValue, foundUser.password);
 
             if (isPasswordValid) {
-                message.success('Ви увійшли!');
+                message.success("You are logged in!");
                 addUserToStore(foundUser);
                 navigateTheUser(foundUser);
             } else {
-                message.error('Ви ввели невірний пароль!');
+                message.error("You have entered an incorrect password!");
                 form.resetFields(['password']);
             }
         } else {
-            message.error('Користувача з таким email та паролем не знайдено. Зареєструйтеся!');
+            message.error("No user with this email and password was found. Sign up!");
             navigate('/register');
         }
     }
 
     function handleLogin() {
         if (!isPasswordValid) {
-            message.error('Пароль повинен містити щонайменше 6 символів');
+            message.error("The password must contain at least 6 characters");
             return;
         }
 
@@ -80,7 +80,7 @@ function LoginForm() {
                     className={'no-star'}
                     label="Email"
                     name="email"
-                    rules={[{ required: true, message: 'Будь ласка, введіть email' }]}
+                    rules={[{ required: true, message: "Please enter your email" }]}
                 >
                     <Input
                         type="email"
@@ -94,7 +94,7 @@ function LoginForm() {
                     className={'no-star'}
                     label="Password"
                     name="password"
-                    rules={[{ required: true, message: 'Будь ласка, введіть пароль' }]}
+                    rules={[{ required: true, message: "Please enter a password" }]}
                 >
                     <Input.Password
                         type="password"

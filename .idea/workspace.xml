@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8882fd3-cb2f-408b-afaf-e6da04cf088b" name="Changes" comment="finished login and register">
+    <list default="true" id="a8882fd3-cb2f-408b-afaf-e6da04cf088b" name="Changes" comment="prepared for merge">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/Login/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Login/LoginForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/components/Register/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Register/RegisterForm.js" afterDir="false" />
     </list>
@@ -30,19 +29,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/1_Программирование/6_Hillel/Final-Project_Front-end-pro/MediCover&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/1_Программирование/6_Hillel/Final-Project_Front-end-pro/MediCover",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\1_Программирование\6_Hillel\Final-Project_Front-end-pro\MediCover" />
@@ -99,7 +98,8 @@
       <workItem from="1691758582970" duration="5054000" />
       <workItem from="1691768387310" duration="2719000" />
       <workItem from="1691831656121" duration="781000" />
-      <workItem from="1692077790358" duration="24621000" />
+      <workItem from="1692077790358" duration="25379000" />
+      <workItem from="1692207217554" duration="7615000" />
     </task>
     <task id="LOCAL-00004" summary="prepared for pushing">
       <created>1691649666106</created>
@@ -150,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692112937483</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="prepared for merge">
+      <created>1692200727613</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1692200727613</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,6 +210,7 @@
     <MESSAGE value="finished the logic for login and registration" />
     <MESSAGE value="modified code after merge" />
     <MESSAGE value="finished login and register" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished login and register" />
+    <MESSAGE value="prepared for merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="prepared for merge" />
   </component>
 </project>
