@@ -4,8 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8882fd3-cb2f-408b-afaf-e6da04cf088b" name="Changes" comment="finished the logic for login and registration">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="a8882fd3-cb2f-408b-afaf-e6da04cf088b" name="Changes" comment="Translated everything into English">
+      <change afterPath="$PROJECT_DIR$/app/src/components/account/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/components/account/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/components/main/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/ProtectedRoute/ProtectedRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/ProtectedRoute/ProtectedRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/appointments/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/appointments/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/appointments/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/appointments/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/main/Doctors.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/main/Doctors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/appointments.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/appointments.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/doctors.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/doctors.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
