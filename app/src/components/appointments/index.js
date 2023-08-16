@@ -9,6 +9,7 @@ import "primereact/resources/primereact.min.css"
 function Appointments() {
 	//params, variables , ref, state
 	let { id } = useParams();
+	console.log(typeof id)
 	let navigate = useNavigate();
 	let user = JSON.parse(localStorage.getItem('loggedInUser'));
 	let userId = user.id;
@@ -29,7 +30,7 @@ function Appointments() {
 	function fetchAppointments() {
 		fetch('http://localhost:8080/api/appointments')
 			.then(response => response.json())
-			.then(data => setAppointmentsInfo(data.filter(appointment => appointment.email === userEmail && appointment.doctorId === id && appointment.bookingDay === date.getDay() && appointment.bookingMounth === date.getMonth())))
+			.then(data => setAppointmentsInfo(data.filter(appointment => appointment.userEmail === userEmail && appointment.doctorId === id && appointment.bookingDay === date.getDay() && appointment.bookingMounth === date.getMonth())))
 			.catch((error) => message.error('щось пішло не так'))
 	}
 
@@ -42,7 +43,7 @@ function Appointments() {
 			body: JSON.stringify(payload)
 		})
 			.then(response => response.json())
-			.then(response => message.success(`Ви записані до лікаря ${info[0].Age}`))
+			.then(response => message.success(`Ви записані до лікаря ${info[0].fullName}`))
 			.catch((error) => console.log('Error:', error))
 	}
 
@@ -60,6 +61,7 @@ function Appointments() {
 		if (date.getDay() > 0 && date.getDay() < 6) {
 			let time = ["10:00-11:00", "11:00-12:00", "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00"]
 			let fetchedData = [];
+			console.log(appointmentsInfo);
 			appointmentsInfo ? appointmentsInfo.map(appointment => fetchedData.push(appointment.bookingTimeRadio)) : console.log(false);
 			const commonArray = time.filter(item => !fetchedData.includes(item));
 			return commonArray.map((time, index) => <label key={index} htmlFor={time}><input type="radio" className="bookin-appointmens__time" id={time} key={index} ref={refBookingTime} name="bookingTime" value={time} onClick={(e) => setBookingTime(e.target.value)} /> {time}</label>)
@@ -83,7 +85,7 @@ function Appointments() {
 		}
 
 		postAppointment(apObj);
-		navigate('/doctors');
+		navigate('/home');
 	}
 
 	function displayButton() {
