@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button, message } from "antd";
+import {useNavigate} from "react-router-dom";
 import "./index.css";
 
  //const { Text } = Typography;
 
-const ApplyDoctorForm = () => {
+const ApplyDoctorForm = () => {  
+  const navigate = useNavigate();
+
+    useEffect(() => {
+        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+        if (loggedInUser) {
+            if (loggedInUser.role === 'admin') {
+                navigate("/admin");
+            } else {
+                navigate("/home");
+                console.log(loggedInUser.role)
+            }
+        }
+    }, [navigate]);
+
   const [form] = Form.useForm();
   const [emailError, setEmailError] = useState("");
   const [fullName, setFullName] = useState("");
@@ -73,7 +88,7 @@ const ApplyDoctorForm = () => {
         name="age"
         rules={[
           { required: true, message: "Please enter your age" },
-          { type: "number", message: "Please enter a valid number" },
+          { type: "string", message: "Please enter a valid number" },
         ]}
       >
         <Input
@@ -148,3 +163,10 @@ const ApplyDoctorForm = () => {
 };
 
 export default ApplyDoctorForm;
+
+
+
+
+
+
+
