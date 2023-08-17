@@ -62,7 +62,6 @@ function Appointments() {
 		if (date.getDay() > 0 && date.getDay() < 6) {
 			let time = ["10:00-11:00", "11:00-12:00", "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00"]
 			let fetchedData = [];
-			console.log(appointmentsInfo);
 			appointmentsInfo ? appointmentsInfo.map(appointment => fetchedData.push(appointment.bookingTimeRadio)) : console.log(false);
 			const commonArray = time.filter(item => !fetchedData.includes(item));
 			return commonArray.length === 0 ? 'No time available on this date' : commonArray.map((time, index) => <label key={index} htmlFor={time}><input type="radio" className="bookin-appointmens__time" id={time} key={index} ref={refBookingTime} name="bookingTime" value={time} onClick={(e) => setBookingTime(e.target.value)} /> {time}</label>)

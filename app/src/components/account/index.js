@@ -35,7 +35,7 @@ const Account = () => {
   return (
     <div className='accountWrap'>
       {appointments.map(item => (
-        <div key={item.id} className='account'>
+        <div key={item.appointmentId} className='account'>
           <p><b>Full Name:</b> {item.doctorfullName}</p>
           <p><b>Speciality:</b> {item.doctorSpeciality}</p>
           <p><b>Time:</b> {item.bookingTimeRadio}</p>
