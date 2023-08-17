@@ -44,3 +44,10 @@ h1, h2, h3, h4, h5, h6, a, span, p {
 .parent-page__title {
     text-decoration: none;
 }
+
+.parent-page__blue {
+    color: #0057B7;
+}
+.parent-page__yellow {
+    color: #FFDD00;
+}
