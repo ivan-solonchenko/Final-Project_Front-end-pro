@@ -13,19 +13,6 @@
     "bookingTimeRadio": "17:00-18:00"
   },
   {
-    "appointmentId": "7433b33a-f3ef-4f47-9c03-2d15d2ff8542",
-    "bookingTimeInfo": "2023-08-16T17:32:03.124Z",
-    "bookingYear": 2023,
-    "bookingMounth": "August",
-    "bookingDay": "Wednesday",
-    "doctorId": "2",
-    "doctorfullName": "Carter Rougeaux",
-    "doctorEmail": "carterRougeaux@gmail.com",
-    "doctorSpeciality": "Cardiologist",
-    "userEmail": "userIvan@gmail.com",
-    "bookingTimeRadio": "10:00-11:00"
-  },
-  {
     "appointmentId": "5d49492c-b5b9-4704-a42f-469104a8ca10",
     "bookingTimeInfo": "2023-08-20T21:00:00.000Z",
     "bookingYear": 2023,
