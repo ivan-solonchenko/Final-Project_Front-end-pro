@@ -5,6 +5,9 @@ import "./index.css";
 
 const ApplyDoctorForm = () => {
   const navigate = useNavigate();
+  const [form] = Form.useForm();
+  const [emailError, setEmailError] = useState("");
+  const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -18,16 +21,6 @@ const ApplyDoctorForm = () => {
     }
   }, [navigate]);
 
-  const [form] = Form.useForm();
-  const [emailError, setEmailError] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-  const [education, setEducation] = useState("");
-  const [experience, setExperience] = useState("");
-  const [speciality, setSpeciality] = useState("");
-  const [doctors, setDoctors] = useState([]);
-
   useEffect(() => {
     fetch("http://localhost:8080/api/doctors")
       .then((response) => response.json())
@@ -35,25 +28,14 @@ const ApplyDoctorForm = () => {
       .catch((error) => console.error("Error:", error));
   }, []);
 
-  function handleSubmit() {
-    const existingDoctor = doctors.find((doctor) => doctor.email === email);
-
-    if (existingDoctor) {
-      message.error("This email is already in use");
-      return;
-    } else {
-      createDoctorAndFetch(fullName, email);
-    }
-  }
-
-  function createDoctorAndFetch(fullName, email) {
+  function createDoctorAndFetch(fullName, email, age, experience, education, speciality) {
     const newDoctorId = doctors.length + 1;
 
     const newDoctor = {
       id: newDoctorId,
       fullName: fullName,
-      age: age,
       email: email,
+      age: age,
       experience: experience,
       education: education,
       speciality: speciality,
@@ -70,7 +52,7 @@ const ApplyDoctorForm = () => {
         if (response.ok) {
           message.success("Doctor application submitted successfully");
           form.resetFields();
-          navigate("шлях куди має перейти після запонення поля");
+          navigate("/admin"); 
         } else {
           message.error("Failed to submit doctor application");
         }
@@ -80,6 +62,23 @@ const ApplyDoctorForm = () => {
         message.error("An error occurred while submitting the form");
       });
   }
+
+  const handleSubmit = () => {
+    const existingDoctor = doctors.find((doctor) => doctor.email === form.getFieldValue("email"));
+
+    if (existingDoctor) {
+      message.error("This email is already in use");
+    } else {
+      createDoctorAndFetch(
+        form.getFieldValue("fullName"),
+        form.getFieldValue("email"),
+        form.getFieldValue("age"),
+        form.getFieldValue("experience"),
+        form.getFieldValue("education"),
+        form.getFieldValue("speciality")
+      );
+    }
+  };
 
   return (
     <Form
@@ -94,10 +93,7 @@ const ApplyDoctorForm = () => {
         rules={[{ required: true, message: "Please enter your full name" }]}
         className="apply-doctor-label"
       >
-        <Input
-          onChange={(e) => setFullName(e.target.value)}
-          className="apply-doctor-input"
-        />
+        <Input className="apply-doctor-input" />
       </Form.Item>
 
       <Form.Item
@@ -109,11 +105,7 @@ const ApplyDoctorForm = () => {
         ]}
         className="apply-doctor-label"
       >
-        <Input
-          onChange={(e) => setAge(e.target.value)}
-          className="apply-doctor-input"
-          type="number"
-        />
+        <Input className="apply-doctor-input" type="number" />
       </Form.Item>
 
       <Form.Item
@@ -122,10 +114,7 @@ const ApplyDoctorForm = () => {
         rules={[{ required: true, message: "Please enter your experience" }]}
         className="apply-doctor-label"
       >
-        <Input
-          onChange={(e) => setExperience(e.target.value)}
-          className="apply-doctor-input"
-        />
+        <Input className="apply-doctor-input" />
       </Form.Item>
 
       <Form.Item
@@ -134,24 +123,18 @@ const ApplyDoctorForm = () => {
         rules={[{ required: true, message: "Please enter your education" }]}
         className="apply-doctor-label"
       >
-        <Input
-          onChange={(e) => setEducation(e.target.value)}
-          className="apply-doctor-input"
-        />
+        <Input className="apply-doctor-input" />
       </Form.Item>
 
       <Form.Item
         label="Speciality"
-        name="swpeciality"
+        name="speciality"
         rules={[
-          { required: true, message: "Please enter your previous workplace" },
+          { required: true, message: "Please enter your speciality" },
         ]}
         className="apply-doctor-label"
       >
-        <Input
-          onChange={(e) => setSpeciality(e.target.value)}
-          className="apply-doctor-input"
-        />
+        <Input className="apply-doctor-input" />
       </Form.Item>
 
       <Form.Item
@@ -165,19 +148,12 @@ const ApplyDoctorForm = () => {
         help={emailError}
         className="apply-doctor-label"
       >
-        <Input
-          className="apply-doctor-input"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <Input className="apply-doctor-input" />
       </Form.Item>
 
       <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          className="apply-doctor-button"
-        > <p className="apply-doctor-submit">Submit</p>
-          
+        <Button type="primary" htmlType="submit" className="apply-doctor-button">
+          <p className="apply-doctor-submit">Submit</p>
         </Button>
       </Form.Item>
     </Form>
