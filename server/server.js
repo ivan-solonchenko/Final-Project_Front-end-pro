@@ -7,8 +7,9 @@ const port = 8080;
 
 app.use(express.json());
 app.use(cors({
-    'Access-Control-Alow-Origin': '*'
+    'Access-Control-Allow-Origin': '*'
 }));
+
 
 app.get('/', (req, res) => {
     res.send('Сервер працює');
@@ -123,7 +124,33 @@ app.post('/api/appointments', (req, res) => {
     })
 });
 
+app.delete('/api/appointments/:appointmentId', (req, res) => {
+    const appointmentId = req.params.appointmentId;
+
+    fs.readFile(appointments, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Server error' });
+        } else {
+            const jsonData = JSON.parse(data);
+            const updatedData = jsonData.filter(item => item.appointmentId !== appointmentId);
+
+            fs.writeFile(appointments, JSON.stringify(updatedData, null, 2), 'utf8', err => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).json({ error: 'Server error' });
+                } else {
+                    res.status(200).json({ message: 'Appointment deleted' });
+                }
+            });
+        }
+    });
+});
+
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 })
+
+

@@ -17,7 +17,7 @@ h1, h2, h3, h4, h5, h6, a, span, p {
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
-    padding: 5px 20px;
+    padding: 10px 20px;
     border-radius: 10px;
     margin: 10px;
 }
@@ -29,5 +29,14 @@ h1, h2, h3, h4, h5, h6, a, span, p {
 }
 
 .parent-page__item:hover {
+    text-decoration: none;
+}
+
+.parent-page__title {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.parent-page__title {
     text-decoration: none;
 }
