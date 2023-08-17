@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button, message } from "antd";
 import { useNavigate } from "react-router-dom";
-import './index.css' ; 
+import "./index.css";
 
 const ApplyDoctorForm = () => {
   const navigate = useNavigate();
@@ -82,29 +82,32 @@ const ApplyDoctorForm = () => {
   }
 
   return (
-    <Form form={form} onFinish={handleSubmit} className="apply-doctor-form"> 
-    
+    <Form
+      form={form}
+      onFinish={handleSubmit}
+      className="apply-doctor-form"
+      layout="vertical"
+    >
       <Form.Item
         label="Full Name"
         name="fullName"
-        rules={[{ required: true, message: "Please enter your full name" }]} 
-        className = 'apply-doctor-label'
+        rules={[{ required: true, message: "Please enter your full name" }]}
+        className="apply-doctor-label"
       >
         <Input
           onChange={(e) => setFullName(e.target.value)}
           className="apply-doctor-input"
         />
       </Form.Item>
-      
-     
+
       <Form.Item
         label="Age"
         name="age"
         rules={[
           { required: true, message: "Please enter your age" },
           { type: "string", message: "Please enter a valid number" },
-        ]} 
-        className = 'apply-doctor-label'
+        ]}
+        className="apply-doctor-label"
       >
         <Input
           onChange={(e) => setAge(e.target.value)}
@@ -113,17 +116,15 @@ const ApplyDoctorForm = () => {
         />
       </Form.Item>
 
-
       <Form.Item
         label="Experience"
         name="experience"
         rules={[{ required: true, message: "Please enter your experience" }]}
-        className = 'apply-doctor-label'
+        className="apply-doctor-label"
       >
         <Input
           onChange={(e) => setExperience(e.target.value)}
-          className="apply-doctor-input" 
-    
+          className="apply-doctor-input"
         />
       </Form.Item>
 
@@ -131,7 +132,7 @@ const ApplyDoctorForm = () => {
         label="Education"
         name="education"
         rules={[{ required: true, message: "Please enter your education" }]}
-        className = 'apply-doctor-label'
+        className="apply-doctor-label"
       >
         <Input
           onChange={(e) => setEducation(e.target.value)}
@@ -144,8 +145,8 @@ const ApplyDoctorForm = () => {
         name="swpeciality"
         rules={[
           { required: true, message: "Please enter your previous workplace" },
-        ]} 
-        className = 'apply-doctor-label'
+        ]}
+        className="apply-doctor-label"
       >
         <Input
           onChange={(e) => setSpeciality(e.target.value)}
@@ -161,8 +162,8 @@ const ApplyDoctorForm = () => {
           { type: "email", message: "Please enter a valid email address" },
         ]}
         validateStatus={emailError ? "error" : ""}
-        help={emailError} 
-        className = 'apply-doctor-label'
+        help={emailError}
+        className="apply-doctor-label"
       >
         <Input
           className="apply-doctor-input"
@@ -175,8 +176,8 @@ const ApplyDoctorForm = () => {
           type="primary"
           htmlType="submit"
           className="apply-doctor-button"
-        >
-          Submit
+        > <p className="apply-doctor-submit">Submit</p>
+          
         </Button>
       </Form.Item>
     </Form>
