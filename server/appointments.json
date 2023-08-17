@@ -13,19 +13,6 @@
     "bookingTimeRadio": "17:00-18:00"
   },
   {
-    "appointmentId": "7433b33a-f3ef-4f47-9c03-2d15d2ff8542",
-    "bookingTimeInfo": "2023-08-16T17:32:03.124Z",
-    "bookingYear": 2023,
-    "bookingMounth": "August",
-    "bookingDay": "Wednesday",
-    "doctorId": "2",
-    "doctorfullName": "Carter Rougeaux",
-    "doctorEmail": "carterRougeaux@gmail.com",
-    "doctorSpeciality": "Cardiologist",
-    "userEmail": "userIvan@gmail.com",
-    "bookingTimeRadio": "10:00-11:00"
-  },
-  {
     "appointmentId": "5d49492c-b5b9-4704-a42f-469104a8ca10",
     "bookingTimeInfo": "2023-08-20T21:00:00.000Z",
     "bookingYear": 2023,
@@ -37,5 +24,18 @@
     "doctorSpeciality": "Dermetologist",
     "userEmail": "userIvan@gmail.com",
     "bookingTimeRadio": "11:00-12:00"
+  },
+  {
+    "appointmentId": "5a17e8e4-f73b-4c31-9181-ef8e74d45162",
+    "bookingTimeInfo": "2023-08-24T21:00:00.000Z",
+    "bookingYear": 2023,
+    "bookingMounth": "August",
+    "bookingDay": "Friday",
+    "doctorId": "3",
+    "doctorfullName": "Kylie Marrone",
+    "doctorEmail": "kylieMarrone@gmail.com",
+    "doctorSpeciality": "Surgeon",
+    "userEmail": "userIvan@gmail.com",
+    "bookingTimeRadio": "16:00-17:00"
   }
 ]
