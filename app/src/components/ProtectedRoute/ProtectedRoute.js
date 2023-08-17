@@ -23,7 +23,7 @@ function ProtectedRoute({ children }) {
               navigate("/home");
             }}
           >
-            <span className="parent-page__blue">Medi</span>{" "}
+            <span className="parent-page__blue">Medi</span>
             <span className="parent-page__yellow">Cover</span>
           </h1>
 
