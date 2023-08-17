@@ -7,7 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Appointments from './components/appointments/index';
 import Admin from "./components/Admin";
 import Doctors from './components/main/Doctors';
-import ApplyDoctorForm from './components/apply a doctor/js';
+import ApplyDoctorForm from './components/applyDoctor/js';
 
 function App() {
     return (
