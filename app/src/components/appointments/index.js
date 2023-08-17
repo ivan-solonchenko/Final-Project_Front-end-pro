@@ -31,8 +31,8 @@ function Appointments() {
 	function fetchAppointments() {
 		fetch('http://localhost:8080/api/appointments')
 			.then(response => response.json())
-			.then(data => setAppointmentsInfo(data.filter(appointment => appointment.userEmail === userEmail && appointment.doctorId === id && appointment.bookingDay === dayNames[date.getDay()] && appointment.bookingMounth === monthArr[date.getMonth()])))
-			.catch((error) => message.error('щось пішло не так'))
+			.then(data => setAppointmentsInfo(data.filter(appointment => appointment.doctorId === id && appointment.bookingDay === dayNames[date.getDay()] && appointment.bookingMounth === monthArr[date.getMonth()])))
+			.catch((error) => message.error('something wrong please contact us by phone'))
 	}
 
 	function postAppointment(payload) {
@@ -44,7 +44,7 @@ function Appointments() {
 			body: JSON.stringify(payload)
 		})
 			.then(response => response.json())
-			.then(response => message.success(`Ви записані до лікаря ${info[0].fullName}`))
+			.then(response => message.success(`You have an appointment to doctor ${info[0].fullName}`))
 			.catch((error) => console.log('Error:', error))
 	}
 
@@ -65,7 +65,7 @@ function Appointments() {
 			console.log(appointmentsInfo);
 			appointmentsInfo ? appointmentsInfo.map(appointment => fetchedData.push(appointment.bookingTimeRadio)) : console.log(false);
 			const commonArray = time.filter(item => !fetchedData.includes(item));
-			return commonArray.length === 0 ? 'No time available on this date' :  commonArray.map((time, index) => <label key={index} htmlFor={time}><input type="radio" className="bookin-appointmens__time" id={time} key={index} ref={refBookingTime} name="bookingTime" value={time} onClick={(e) => setBookingTime(e.target.value)} /> {time}</label>)
+			return commonArray.length === 0 ? 'No time available on this date' : commonArray.map((time, index) => <label key={index} htmlFor={time}><input type="radio" className="bookin-appointmens__time" id={time} key={index} ref={refBookingTime} name="bookingTime" value={time} onClick={(e) => setBookingTime(e.target.value)} /> {time}</label>)
 		} else {
 			return <p>Day is nt alailable</p>
 		}

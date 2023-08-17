@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "name": "Іван",
-    "email": "userIvan@gmail.com",
+    "name": "Користувач",
+    "email": "user@gmail.com",
     "password": "$2a$10$FK.gNjw1roLUezHvJCDNWuGcHeCh1B0ItnzFmzvsxo..xpwIay19C",
     "role": "user"
   },
@@ -12,5 +12,26 @@
     "email": "admin@gmail.com",
     "password": "$2a$10$9qVP2lIJxgMf8B8D21ol8.S6t..mQjGKsAUgjYtzPqcYvEa8liLsq",
     "role": "admin"
+  },
+  {
+    "id": 3,
+    "name": "Artem",
+    "email": "yershovartem1990@gmail.com",
+    "password": "$2a$10$n3GGV1GDKRJb8ajxLIttku18NHBGTRzOlU1DJQh2yx0mVmPg5eO3G",
+    "role": "user"
+  },
+  {
+    "id": 4,
+    "name": "Kolia",
+    "email": "kolia5@gmail.com",
+    "password": "$2a$10$COahY4q5pxoxF6hYS./jP.s62ONXbSnBr4H/Id2atO7BSVL/2CZqC",
+    "role": "user"
+  },
+  {
+    "id": 5,
+    "name": "Vladislava",
+    "email": "vladislava@ukr.net",
+    "password": "$2a$10$7BwQAgEdSOzf/gWZggP97e2sDOOCH5KW7kdBHD0MArdaAxmdoESCa",
+    "role": "user"
   }
 ]

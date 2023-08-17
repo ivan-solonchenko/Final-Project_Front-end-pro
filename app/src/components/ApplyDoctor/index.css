@@ -1,0 +1,43 @@
+.apply-doctor-form {
+  background-color: #fff;
+  color: #0e0e0e;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-left: 10px;
+  font-size: 40px;
+  font-style: italic;
+  font-weight: 500;
+  margin-top: 20px;
+  border: 2px groove gray;
+}
+.apply-doctor-input {
+  border: 2px groove #0e0e0e;
+
+  text-align: start;
+}
+.apply-doctor-label {
+  width: 300px;
+}
+.apply-doctor-button {
+  height: 45px;
+  max-width: 100px;
+  margin: 10px 0;
+  padding: 0 20px;
+  border: 2px groove #fff;
+  background-color: #0e0e0e;
+  color: #fff !important ;
+  text-shadow: #fff;
+  text-align: center;
+}
+.apply-doctor-submit {
+  color: #fff;
+  
+}
+.apply-doctor-button:hover {
+  background-color: #599150 !important;
+  color: #fff;
+}
