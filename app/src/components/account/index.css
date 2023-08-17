@@ -12,7 +12,8 @@
 }
 
 .account {
-  border: 1px solid #116A7B;
+  background-color: white;
+  border-radius: 10px;
   padding: 5px;
   width: 33%;
 }
@@ -27,4 +28,5 @@
   color: #fdfdfd;
   margin-top: 10px;
   margin-bottom: 5px;
+  cursor: pointer;
 }

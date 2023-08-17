@@ -30,6 +30,7 @@
     color: white;
     background-color: black;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .login-form__button:hover {
