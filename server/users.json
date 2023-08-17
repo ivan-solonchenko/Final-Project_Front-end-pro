@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "name": "Іван",
-    "email": "userIvan@gmail.com",
+    "name": "Користувач",
+    "email": "user@gmail.com",
     "password": "$2a$10$FK.gNjw1roLUezHvJCDNWuGcHeCh1B0ItnzFmzvsxo..xpwIay19C",
     "role": "user"
   },

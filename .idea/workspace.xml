@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a8882fd3-cb2f-408b-afaf-e6da04cf088b" name="Changes" comment="prepared for merge">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/Login/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Login/LoginForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/Register/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/Register/RegisterForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/components/account/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/components/account/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/components/main/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/ProtectedRoute/ProtectedRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/ProtectedRoute/ProtectedRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/appointments/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/appointments/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/appointments/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/appointments/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/main/Doctors.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/main/Doctors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/appointments.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/appointments.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/doctors.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/doctors.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="SOFT" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2TmF1BuOZ1M2mH8DC05ZspAkxxn" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/1_Программирование/6_Hillel/Final-Project_Front-end-pro/MediCover&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\1_Программирование\6_Hillel\Final-Project_Front-end-pro\MediCover" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/app/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task id="LOCAL-00001" summary="first merge main into ivan">
+      <created>1691599619869</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1691599619869</updated>
+    </task>
+    <task id="LOCAL-00002" summary="first merge main into ivan">
+      <created>1691599841000</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1691599841000</updated>
+    </task>
+    <task id="LOCAL-00003" summary="connected the server">
+      <created>1691611545906</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1691611545906</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a8882fd3-cb2f-408b-afaf-e6da04cf088b" name="Changes" comment="connected the server" />
+      <created>1691640492030</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1691640492030</updated>
+      <workItem from="1691640496866" duration="340000" />
+      <workItem from="1691645131512" duration="31769000" />
+      <workItem from="1691758582970" duration="5054000" />
+      <workItem from="1691768387310" duration="2719000" />
+      <workItem from="1691831656121" duration="781000" />
+      <workItem from="1692077790358" duration="25379000" />
+      <workItem from="1692207217554" duration="7615000" />
+    </task>
+    <task id="LOCAL-00004" summary="prepared for pushing">
+      <created>1691649666106</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1691649666106</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added hashed password">
+      <created>1691679112621</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1691679112621</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added password validation">
+      <created>1691681045415</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1691681045415</updated>
+    </task>
+    <task id="LOCAL-00007" summary="finished the logic for login and registration">
+      <created>1691749365905</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1691749365905</updated>
+    </task>
+    <task id="LOCAL-00008" summary="finished the logic for login and registration">
+      <created>1691749622166</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1691749622166</updated>
+    </task>
+    <task id="LOCAL-00009" summary="modified code after merge">
+      <created>1692043926004</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1692043926004</updated>
+    </task>
+    <task id="LOCAL-00010" summary="finished login and register">
+      <created>1692112937483</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1692112937483</updated>
+    </task>
+    <task id="LOCAL-00011" summary="prepared for merge">
+      <created>1692200727613</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1692200727613</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="ivan" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="ivan" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first merge main into ivan" />
+    <MESSAGE value="connected the server" />
+    <MESSAGE value="prepared for pushing" />
+    <MESSAGE value="added hashed password" />
+    <MESSAGE value="added password validation" />
+    <MESSAGE value="finished the logic for login and registration" />
+    <MESSAGE value="modified code after merge" />
+    <MESSAGE value="finished login and register" />
+    <MESSAGE value="prepared for merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="prepared for merge" />
+  </component>
+</project>
