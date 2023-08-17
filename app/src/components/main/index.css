@@ -12,7 +12,9 @@
   }
   
   .doctor {
-    border: 1px solid #116A7B;
+    background-color: white;
+    border-radius: 10px;
     padding: 5px;
     width: 33%;
+    cursor: pointer;
   }
