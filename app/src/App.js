@@ -10,7 +10,7 @@ import Doctors from './components/main/Doctors';
 import ApplyDoctorForm from './components/ApplyDoctor/js';
 
 import Account from "./components/account";
-
+import NotFound from './components/error/index';
 
 function App() {
     return (
@@ -25,7 +25,7 @@ function App() {
                 <Route path='/admin' element={<ProtectedRoute><ApplyDoctorForm /></ProtectedRoute>} /> 
 
                 <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} /> 
-
+                <Route path="*" element={<NotFound />} /> 
               </Routes>
             </BrowserRouter>
         </div>
