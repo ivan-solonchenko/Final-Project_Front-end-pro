@@ -1,12 +1,9 @@
-* { 
-	/* double split complementary */
-
-}
 
 .doctors-appoitments{
 	background-color: #fff;
 	padding: 5px 20px;
 	border-radius: 10px;
+	margin: 0 10px;
 }
 .doctors-appoitments__title {
 	border-bottom: 2px solid grey;

@@ -7,7 +7,7 @@ import Appointments from './components/appointments/index';
 import Admin from "./components/Admin";
 import Doctors from './components/main/Doctors';
 
-import ApplyDoctorForm from './components/applyDoctor/js';
+import ApplyDoctorForm from './components/ApplyDoctor/js';
 
 import Account from "./components/account";
 

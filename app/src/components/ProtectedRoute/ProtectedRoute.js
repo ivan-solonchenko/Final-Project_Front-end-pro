@@ -38,13 +38,9 @@ function ProtectedRoute({ children }) {
               </h3>
             )}
           </div>
-          <div className="parent-page__item">
+          <div className="parent-page__admin">
             {user.role === "admin" && (
-              <h3
-                onClick={() => {
-                  navigate("/applyDoctor");
-                }}
-              >
+              <h3>
                 Admin page functions
               </h3>
             )}
