@@ -33,5 +33,19 @@
     "email": "vladislava@ukr.net",
     "password": "$2a$10$7BwQAgEdSOzf/gWZggP97e2sDOOCH5KW7kdBHD0MArdaAxmdoESCa",
     "role": "user"
+  },
+  {
+    "id": 6,
+    "name": "hillel",
+    "email": "hillel@gmal.com",
+    "password": "$2a$10$dEmrcJ2zH2P2r60wFtpVDeAA3Am23z3JnIv1jZpQv/sD73qyQO.Jq",
+    "role": "user"
+  },
+  {
+    "id": 7,
+    "name": "user1",
+    "email": "user1@gmail.com",
+    "password": "$2a$10$dNv4ppaWi.NgQW.chB6iIOoCmAT.QBmqFnOARBS.bbnhpO2EV6oDK",
+    "role": "user"
   }
 ]
